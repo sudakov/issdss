@@ -1,0 +1,477 @@
+body
+{
+    background: #769fc8;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+#main
+{
+	width: 1140px;
+  	margin: 0 auto;
+}
+
+#main_admin
+{
+  	margin: 0 auto;
+	padding: 25px;
+	height: 100%;
+	min-height: 100%;
+}
+
+.parent
+{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+.window
+{
+    background-color: White;
+    border-color: #BBC9D7;
+    border-style: solid;
+    border-width: medium;
+    max-height: 600px;
+    overflow: auto;
+    padding: 10px;
+    position: relative;
+    width: 600px;
+}
+
+.edit_form
+{
+  	margin: 0 auto;
+	padding: 50px;
+	position: relative;
+}
+
+.text_header1
+{
+	color: #000000;
+	font-family: Tahoma;
+	font-size: 12pt;
+	font-weight: bold;
+	padding: 10px;
+	text-align: center;
+}
+
+.text_header2
+{
+	color: #000000;
+	font-family: Tahoma;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.text
+{
+	color: #000000;
+	font-family: Tahoma;
+	font-size: 10pt;
+}
+
+.centerText
+{
+    text-align: center;    
+}
+
+.ErrorMessage
+{
+    color: Red;
+    background-color: White;
+    font-size: small;
+    font-family:Calibri;
+}
+
+.NotErrorMessage
+{
+    color: Green;
+    background-color: White;
+    font-size: small;
+    font-family:Calibri;    
+}
+
+.tdText
+{
+    vertical-align: top;
+    text-align: left;
+    font-family: Calibri;
+}
+
+/*---------- стили меню авторизации ----------*/
+._AM_Label
+{
+	font-family: verdana;
+	font-size: 8pt;
+	font-weight: bold; 
+	color: #e5f2fb;
+}
+
+._AM_Hyperlink
+{
+	font-family: verdana;
+	font-size: 8pt;
+	font-weight: bold; 
+	color: #e5f2fb;
+}
+
+._AM_Hyperlink:link
+{
+	text-decoration: none;
+	color: #e5f2fb; 
+}
+
+._AM_Hyperlink:visited
+{
+	text-decoration: none;
+	color: #e5f2fb; 
+}
+
+._AM_Hyperlink:hover
+{
+	color: #09197e;
+}
+
+._AM_Separator
+{
+	font-family: verdana;
+	font-size: 12pt;
+	color: #e5f2fb;
+}
+
+/*---------- стили ссылок в гриде ----------*/
+
+.link_into_grid
+{
+	font-family: verdana;
+	font-size: 8pt;
+	color: #09197e;
+}
+
+.link_into_grid:link
+{
+	text-decoration: none;
+	color: #09197e; 
+}
+
+.link_into_grid:visited
+{
+	text-decoration: none;
+	color: #09197e; 
+}
+
+.link_into_grid:hover
+{
+	text-decoration: underline;
+	color: #0000EE;
+}
+
+/*--------- стиль для левого меню ----------*/
+td.menuLink
+{
+    background-color: #CCE0F2;
+    color: #314055;
+    font-family: Tahoma;
+    font-size: 12px;
+    font-weight: bold;
+	cursor: pointer;
+	text-align:center;
+	vertical-align:middle;
+}
+
+td.menuLink:hover
+{
+	background-color: #E3F3FF;
+    color: #314055;
+    font-family: Tahoma;
+    font-size: 12px;
+    font-weight: bold;
+	cursor: pointer;
+	text-align:center;
+	vertical-align:middle;
+}
+
+div.menuLabel
+{
+    margin:0 auto;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+td.menuLabel
+{
+    background-color: #CCE0F2;
+    color: #314055;
+    font-family: Tahoma;
+    font-size: 12px;
+    font-weight: bold;
+    cursor:default;
+}
+
+td.menuSpacing
+{
+	height: 10px;
+}
+
+table.userMenu
+{
+	color: #314055;
+	font-family: Verdana;
+	font-size: 8pt;
+	font-weight: normal;
+	width: 100%;
+}
+
+table.userMenu td.menuItem
+{
+	background-color: #CCE0F2;
+	border-left: 1px solid #bbc9d7;
+	border-right: 1px solid #bbc9d7;
+	cursor: pointer;
+}
+
+table.userMenu td.menuItem:hover
+{
+	background-color: #E3F3FF;
+	border-left: 1px solid #bbc9d7;
+	border-right: 1px solid #bbc9d7;
+	cursor: pointer;
+}
+
+table.userMenu td.menuSep
+{
+    background: url(../Images/Menu/menu_sep.png);
+    background-repeat: repeat-x;
+	border-left: 1px solid #bbc9d7;
+	border-right: 1px solid #bbc9d7;
+	cursor: pointer;
+    height: 4px;
+}
+
+table.userMenuItem
+{
+    height: 100%;
+	width: 100%;
+}
+
+table.userMenuItem td.spacing
+{
+	width: 5px;
+}
+
+table.userMenuItem td.point
+{
+    background: url(../Images/Menu/menu_point.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+	width: 30px;
+}
+
+table.userMenuItem td.content
+{
+	padding-right: 5px;
+}
+
+table.userMenuItem td.headerCorner
+{
+    background: url(../Images/Menu/menu_top_begin.png);
+    background-repeat: no-repeat;
+    height: 14px;
+    width: 12px;
+}
+
+table.userMenuItem td.header
+{
+    background: url(../Images/Menu/menu_top_middle.png);
+    background-repeat: repeat-x;
+    border-right: 1px solid #bbc9d7;
+}
+
+table.userMenuItem td.footerCorner
+{
+    background: url(../Images/Menu/menu_bottom_end.png);
+    background-repeat: no-repeat;
+    height: 14px;
+    width: 12px;
+}
+
+table.userMenuItem td.footer
+{
+    background: url(../Images/Menu/menu_bottom_middle.png);
+    background-repeat: repeat-x;
+    border-left: 1px solid #bbc9d7;
+}
+
+/*--------- стиль для контента админских страниц ---------*/
+td.itemSpacing
+{
+	height: 3px;
+}
+
+table.contentItems
+{
+	width: 100%;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+}
+
+table.contentItems td.itemSpacingHoriz
+{
+	width: 3px;
+}
+
+table.contentItems td.contentItem
+{
+	background-color: #D9E4E9;
+}
+
+table.contentItems td.contentItemTitle
+{
+	width: 100%;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	font-weight: bold;
+}
+
+table.contentItems td.contentItemTitle50
+{
+	width: 50%;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+	vertical-align: middle;
+	text-align: right;
+}
+
+table.contentItems td.contentItemTitle30
+{
+	width: 30%;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+	vertical-align: middle;
+	text-align: right;
+}
+
+td.controls
+{
+	background-color: #F2F2F2;
+	color: #000000;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+}
+
+/*--------- Грид ---------*/
+td.contentTableTitle {
+	background-color:#506C82; font-weight:bold; color:white; padding:5px 5px 5px 3px; border-right:1px solid white;
+}
+td.contentTableTitleSort {
+	background-color:#7D94A7; font-weight:bold; color:white; padding:5px 5px 5px 3px; border-right:1px solid white;
+}
+td.contentTableTitleSort img {
+	margin-bottom:1px;
+}
+tr.contentTableCell {
+	padding:3px 5px 3px 3px; vertical-align:top;
+}
+tr.contentTableCellAlt {
+	background-color:#F2F2F2; padding:3px 5px 3px 3px; vertical-align:top;
+}
+td.contentTableCell {
+	padding:3px 5px 3px 3px; vertical-align:top;
+}
+td.contentTableCellAlt {
+	background-color:#F2F2F2; padding:3px 5px 3px 3px; vertical-align:top;
+}
+td.contentTableFooter {
+	background-color:#EAF0F3; border-top:1px solid #C5CFD4; padding:5px 5px 5px 3px;
+}
+
+tr.contentTableTitle th {
+	background-color:#003C78; font-weight:bold; color:white; padding:5px 5px 5px 3px; border-right:1px solid white;
+}
+tr.contentTableTitleSort th {
+	background-color:#7D94A7; font-weight:bold; color:white; padding:5px 5px 5px 3px; border-right:1px solid white;
+}
+tr.contentTableTitle th a{
+	font-weight:bold; color:white; text-decoration: none;
+}
+tr.contentTableTitle th a{
+	font-weight:bold; color:white; text-decoration: none; 
+}
+
+/*--------- Таблица ---------*/
+._TBL_HeadCell{
+	background-color: #003C78;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;
+	color: white;
+	cursor: default;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 3px 3px 3px 3px;
+	text-align: center;
+}
+
+._TBL_HeadCellParent{
+    background-color: #1E5A96;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    color: white;
+	cursor: default;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 3px 3px 3px;
+    text-align: center;
+}
+
+._TBL_MainCell
+{
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+	padding: 3px 3px 3px 3px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+._TBL_MainCellAlt{
+	background-color:#F2F2F2;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+	padding: 3px 3px 3px 3px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.labelInGrid
+{
+    color: Blue;
+    cursor: pointer;    
+    text-decoration: underline;
+}
+.labelInGrid:hover
+{
+    color: Blue;
+    cursor: pointer;    
+    text-decoration: none;
+}
+.imgInGrid
+{
+    cursor: pointer;    
+}

@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="DSS.DSS.Site" %>
+<%@ Register Src="~/DSS/Controls/Authority.ascx" TagName="Authority" TagPrefix="DSS" %>
+<%@ Register Src="~/DSS/Controls/Identity.ascx" TagName="Identity" TagPrefix="DSS" %>
+<%@ Register Src="~/DSS/Controls/Menu.ascx" TagName="Menu" TagPrefix="DSS" %>
+<%@ Register Src="~/DSS/Controls/PersonDLL.ascx" TagName="PersonDDL" TagPrefix="DSS" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="Title" runat="server" />
+    </title>
+    <link href="Styles/Site.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="main_admin">
+        <table style="width: 100%; left: 0px; top: 0px;" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td style="width:300px; height:0px;">
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:60px; background:url(Images/head.png); border:1px solid #bbc9d7; background-repeat:repeat-x;">
+                    <table style="width: 100%; height:100%;" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td align="center" valign="middle" style="width:1px;">
+                                <img runat="server" ID="_IMG_Header" src="~/DSS/Images/wheels.png" style="padding-left:10px; padding-right:10px;" alt="header" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Label runat="server" ID="Label1" style=" vertical-align:middle; color:#FFFFFF; font-family:Comic Sans MS; font-size:18pt; font-weight:bold; white-space:nowrap;">
+                                    <asp:ContentPlaceHolder ID="Header" runat="server" />
+                                </asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top" style="padding:10px; background:#e5f2fb; border-left:1px solid #bbc9d7; border-bottom:1px solid #bbc9d7;">
+                    <DSS:Authority ID="Authority1" runat="server" Visible="false" />
+                    <DSS:Identity ID="Identity1" runat="server" Visible="false" />
+                    <DSS:Menu ID="Menu1" runat="server" />
+                    <DSS:PersonDDL ID="PersonDDL1" runat="server" />
+                </td>
+                <td align="left" valign="top" style="padding-bottom:10px; padding-left:0px; padding-right:10px; padding-top:10px; background:#e5f2fb; border-bottom:1px solid #bbc9d7; border-right:1px solid #bbc9d7;">
+                    <asp:Panel runat="server" ID="_PNL_MainContent" style="border:1px solid #bbc9d7; background-color:White; padding:20px;">
+                        <div id="clientArea">
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+                        </div>
+                    </asp:Panel>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <asp:Label runat="server" ID="_LBL_Name" Visible="false"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_Task" Visible="false"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_TaskView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_AltView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_CritView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_ResView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_ValueView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_RankResultView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_PersonView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_RoleView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_PlanView" Visible="false" Text="0"></asp:Label>
+    <asp:Label runat="server" ID="_LBL_ViewAllPerson" Visible="false" Text="0"></asp:Label>
+
+    </form>
+</body>
+</html>
