@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{23AE6E36-DAF8-477D-B0EE-6A821035E3DB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSS</RootNamespace>
+    <AssemblyName>DSS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.aspx" />
+    <Content Include="DSS\Alternative.aspx" />
+    <Content Include="DSS\AlternativePerson.aspx" />
+    <Content Include="DSS\Assessment.aspx" />
+    <Content Include="DSS\Controls\Authority.ascx" />
+    <Content Include="DSS\Controls\Identity.ascx" />
+    <Content Include="DSS\Controls\Menu.ascx" />
+    <Content Include="DSS\Controls\PersonDLL.ascx" />
+    <Content Include="DSS\Criteria.aspx" />
+    <Content Include="DSS\DirectValues.aspx" />
+    <Content Include="DSS\EditJob.aspx" />
+    <Content Include="DSS\Gantt.aspx" />
+    <Content Include="DSS\Images\add.gif" />
+    <Content Include="DSS\Images\alert.png" />
+    <Content Include="DSS\Images\del.gif" />
+    <Content Include="DSS\Images\del.png" />
+    <Content Include="DSS\Images\del50.gif" />
+    <Content Include="DSS\Images\edit.gif" />
+    <Content Include="DSS\Images\edit.png" />
+    <Content Include="DSS\Images\gantt.png" />
+    <Content Include="DSS\Images\head.PNG" />
+    <Content Include="DSS\Images\Menu\menu_bg.png" />
+    <Content Include="DSS\Images\Menu\menu_bg_hover.png" />
+    <Content Include="DSS\Images\Menu\menu_bottom_begin.png" />
+    <Content Include="DSS\Images\Menu\menu_bottom_end.png" />
+    <Content Include="DSS\Images\Menu\menu_bottom_middle.png" />
+    <Content Include="DSS\Images\Menu\menu_point.png" />
+    <Content Include="DSS\Images\Menu\menu_sep.png" />
+    <Content Include="DSS\Images\Menu\menu_top_begin.png" />
+    <Content Include="DSS\Images\Menu\menu_top_end.png" />
+    <Content Include="DSS\Images\Menu\menu_top_middle.png" />
+    <Content Include="DSS\Default.aspx" />
+    <Content Include="DSS\Images\new.png" />
+    <Content Include="DSS\Images\ok.png" />
+    <Content Include="DSS\Images\play.png" />
+    <Content Include="DSS\Images\range.png" />
+    <Content Include="DSS\Images\save.png" />
+    <Content Include="DSS\Images\add.png" />
+    <Content Include="DSS\Images\Slider\center.png" />
+    <Content Include="DSS\Images\Slider\left.png" />
+    <Content Include="DSS\Images\Slider\line.png" />
+    <Content Include="DSS\Images\Slider\percent.png" />
+    <Content Include="DSS\Images\Slider\pointer.png" />
+    <Content Include="DSS\Images\Slider\right.png" />
+    <Content Include="DSS\Images\wheels.png" />
+    <Content Include="DSS\Options.aspx" />
+    <Content Include="DSS\PairCritCompare.aspx" />
+    <Content Include="DSS\PasswordRecovery.aspx" />
+    <Content Include="DSS\Person.aspx" />
+    <Content Include="DSS\PersonAlternative.aspx" />
+    <Content Include="DSS\PersonInfo.aspx" />
+    <Content Include="DSS\PersonRole.aspx" />
+    <Content Include="DSS\PersonTask.aspx" />
+    <Content Include="DSS\Plan.aspx" />
+    <Content Include="DSS\Ranking.aspx" />
+    <Content Include="DSS\Registration.aspx" />
+    <Content Include="DSS\Resource.aspx" />
+    <Content Include="DSS\Role.aspx" />
+    <Content Include="DSS\RolePermission.aspx" />
+    <Content Include="DSS\RolePerson.aspx" />
+    <Content Include="DSS\Scripts\jsgantt.js" />
+    <Content Include="DSS\Scripts\Slider.js" />
+    <Content Include="DSS\Scripts\ValueTable.js" />
+    <Content Include="DSS\Styles\jsgantt.css" />
+    <Content Include="DSS\Styles\Site.css" />
+    <Content Include="DSS\Task.aspx" />
+    <Content Include="DSS\TaskPerson.aspx" />
+    <Content Include="DSS\Value.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Alternative.aspx.cs">
+      <DependentUpon>Alternative.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Alternative.aspx.designer.cs">
+      <DependentUpon>Alternative.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\AlternativePerson.aspx.cs">
+      <DependentUpon>AlternativePerson.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\AlternativePerson.aspx.designer.cs">
+      <DependentUpon>AlternativePerson.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Assessment.aspx.cs">
+      <DependentUpon>Assessment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Assessment.aspx.designer.cs">
+      <DependentUpon>Assessment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Classes\Helper.cs" />
+    <Compile Include="DSS\Controls\Authority.ascx.cs">
+      <DependentUpon>Authority.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Controls\Authority.ascx.designer.cs">
+      <DependentUpon>Authority.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Controls\Identity.ascx.cs">
+      <DependentUpon>Identity.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Controls\Identity.ascx.designer.cs">
+      <DependentUpon>Identity.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Controls\Menu.ascx.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Controls\Menu.ascx.designer.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Controls\PersonDLL.ascx.cs">
+      <DependentUpon>PersonDLL.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Controls\PersonDLL.ascx.designer.cs">
+      <DependentUpon>PersonDLL.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Criteria.aspx.cs">
+      <DependentUpon>Criteria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Criteria.aspx.designer.cs">
+      <DependentUpon>Criteria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\DirectValues.aspx.cs">
+      <DependentUpon>DirectValues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\DirectValues.aspx.designer.cs">
+      <DependentUpon>DirectValues.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\EditJob.aspx.cs">
+      <DependentUpon>EditJob.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\EditJob.aspx.designer.cs">
+      <DependentUpon>EditJob.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Gantt.aspx.cs">
+      <DependentUpon>Gantt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Gantt.aspx.designer.cs">
+      <DependentUpon>Gantt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Options.aspx.cs">
+      <DependentUpon>Options.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Options.aspx.designer.cs">
+      <DependentUpon>Options.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\PairCritCompare.aspx.cs">
+      <DependentUpon>PairCritCompare.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\PairCritCompare.aspx.designer.cs">
+      <DependentUpon>PairCritCompare.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\PasswordRecovery.aspx.cs">
+      <DependentUpon>PasswordRecovery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\PasswordRecovery.aspx.designer.cs">
+      <DependentUpon>PasswordRecovery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Person.aspx.cs">
+      <DependentUpon>Person.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Person.aspx.designer.cs">
+      <DependentUpon>Person.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\PersonAlternative.aspx.cs">
+      <DependentUpon>PersonAlternative.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\PersonAlternative.aspx.designer.cs">
+      <DependentUpon>PersonAlternative.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\PersonInfo.aspx.cs">
+      <DependentUpon>PersonInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\PersonInfo.aspx.designer.cs">
+      <DependentUpon>PersonInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\PersonRole.aspx.cs">
+      <DependentUpon>PersonRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\PersonRole.aspx.designer.cs">
+      <DependentUpon>PersonRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\PersonTask.aspx.cs">
+      <DependentUpon>PersonTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\PersonTask.aspx.designer.cs">
+      <DependentUpon>PersonTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Plan.aspx.cs">
+      <DependentUpon>Plan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Plan.aspx.designer.cs">
+      <DependentUpon>Plan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Ranking.aspx.cs">
+      <DependentUpon>Ranking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Ranking.aspx.designer.cs">
+      <DependentUpon>Ranking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Registration.aspx.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Registration.aspx.designer.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Resource.aspx.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Resource.aspx.designer.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Role.aspx.cs">
+      <DependentUpon>Role.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Role.aspx.designer.cs">
+      <DependentUpon>Role.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\RolePermission.aspx.cs">
+      <DependentUpon>RolePermission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\RolePermission.aspx.designer.cs">
+      <DependentUpon>RolePermission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\RolePerson.aspx.cs">
+      <DependentUpon>RolePerson.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\RolePerson.aspx.designer.cs">
+      <DependentUpon>RolePerson.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Task.aspx.cs">
+      <DependentUpon>Task.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Task.aspx.designer.cs">
+      <DependentUpon>Task.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\TaskPerson.aspx.cs">
+      <DependentUpon>TaskPerson.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\TaskPerson.aspx.designer.cs">
+      <DependentUpon>TaskPerson.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Value.aspx.cs">
+      <DependentUpon>Value.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Value.aspx.designer.cs">
+      <DependentUpon>Value.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DSS\Site.Master" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>1598</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
