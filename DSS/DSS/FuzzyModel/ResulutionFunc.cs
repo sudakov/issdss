@@ -2,7 +2,7 @@
 
 namespace DSS.DSS.FuzzyModel
 {
-    public static class Functions
+    public static class ResulutionFunc
     {
         /// <summary>
         /// Безупречный

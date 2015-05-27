@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
@@ -122,6 +126,7 @@
     <Content Include="DSS\Role.aspx" />
     <Content Include="DSS\RolePermission.aspx" />
     <Content Include="DSS\RolePerson.aspx" />
+    <Content Include="DSS\Scripts\jquery-1.11.3.min.js" />
     <Content Include="DSS\Scripts\jsgantt.js" />
     <Content Include="DSS\Scripts\Slider.js" />
     <Content Include="DSS\Scripts\ValueTable.js" />
@@ -224,7 +229,11 @@
     <Compile Include="DSS\EditJob.aspx.designer.cs">
       <DependentUpon>EditJob.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DSS\FuzzyModel\Functions.cs" />
+    <Compile Include="DSS\FuzzyModel\Core.cs" />
+    <Compile Include="DSS\FuzzyModel\FuzzyNumber.cs" />
+    <Compile Include="DSS\FuzzyModel\FuzzyRankResult.cs" />
+    <Compile Include="DSS\FuzzyModel\ResulutionFunc.cs" />
+    <Compile Include="DSS\FuzzyModel\Rule.cs" />
     <Compile Include="DSS\Gantt.aspx.cs">
       <DependentUpon>Gantt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -376,7 +385,9 @@
   <ItemGroup>
     <Content Include="DSS\Site.Master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
