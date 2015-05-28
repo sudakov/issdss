@@ -11,6 +11,13 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <%--<asp:HiddenField runat="server" ID="hfHeaders"/>--%>
     <div>
+        <asp:Label runat="server" Text="Точность"></asp:Label>
+        <br/>
+        <asp:TextBox ID="tbIterCount" runat="server" Text="11"/>
+        <br/>
+        <br/>
+        <asp:Label runat="server" Text="Сравнительная таблица альтернатив"></asp:Label>
+        <asp:CompareValidator ID="cv" runat="server" ControlToValidate="tbIterCount" Type="Integer" Operator="GreaterThan" ErrorMessage="Значение должно быть числом больше 1" ValueToCompare="1" />
         <asp:GridView runat="server" ID="gvAlts" AutoGenerateColumns="True"></asp:GridView>
         <br/>
         <asp:Button runat="server" OnClick="RunFuzzyRanking" Text="Рассчитать"/>

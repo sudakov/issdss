@@ -50,6 +50,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -230,10 +231,17 @@
       <DependentUpon>EditJob.aspx</DependentUpon>
     </Compile>
     <Compile Include="DSS\FuzzyModel\Core.cs" />
+    <Compile Include="DSS\FuzzyModel\DAL\FuzzyDataContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FuzzyDataContext.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DSS\FuzzyModel\FuzzyNumber.cs" />
     <Compile Include="DSS\FuzzyModel\FuzzyRankResult.cs" />
+    <Compile Include="DSS\FuzzyModel\ResolutionEnum.cs" />
     <Compile Include="DSS\FuzzyModel\ResulutionFunc.cs" />
     <Compile Include="DSS\FuzzyModel\Rule.cs" />
+    <Compile Include="DSS\FuzzyModel\RuleTypeEnum.cs" />
     <Compile Include="DSS\Gantt.aspx.cs">
       <DependentUpon>Gantt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -387,6 +395,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DSS\FuzzyModel\DAL\FuzzyDataContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>FuzzyDataContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DSS\FuzzyModel\DAL\FuzzyDataContext.dbml.layout">
+      <DependentUpon>FuzzyDataContext.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

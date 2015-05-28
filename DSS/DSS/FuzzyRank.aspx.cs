@@ -15,15 +15,6 @@ namespace DSS.DSS
 {
     public partial class FuzzyRank : Page
     {
-        private static readonly double[,] U =
-        {
-            {0.8, 0.6, 0.5, 0.1, 0.3},
-            {0.5, 1, 0, 0.5, 1},
-            {0.6, 0.9, 1, 0.7, 1},
-            {1, 0.3, 1, 0, 0},
-            {0, 0.5, 1, 0.8, 0.1}
-        };
-
         private double bestResult;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,12 +27,12 @@ namespace DSS.DSS
 
         private static void InitAlts(DataTable dt)
         {
-            for (int i = 0; i < U.GetLength(0); i++)
+            for (int i = 0; i < Core.U.GetLength(0); i++)
             {
                 var row = dt.NewRow();
-                for (int j = 0; j < U.GetLength(1); j++)
+                for (int j = 0; j < Core.U.GetLength(1); j++)
                 {
-                    row[j] = U[i, j];
+                    row[j] = Core.U[i, j];
                 }
                 dt.Rows.Add(row);
             }
@@ -59,7 +50,8 @@ namespace DSS.DSS
 
         protected void RunFuzzyRanking(object sender, EventArgs e)
         {
-            var fuzzyRankResult = Core.Compute(U);
+            int iterCount = int.Parse(tbIterCount.Text);
+            var fuzzyRankResult = Core.Compute(Core.U, iterCount);
 
             bestResult = fuzzyRankResult.Best;
             

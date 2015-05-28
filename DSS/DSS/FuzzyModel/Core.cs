@@ -1,22 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using DSS.DSS.FuzzyModel.DAL;
 
 namespace DSS.DSS.FuzzyModel
 {
     public static class Core
     {
-       static readonly double[] J = Enumerable.Range(0, 11).Select(x => x * 0.1).ToArray();
-        public static readonly string[] Criteria =
+        public static readonly string[] Criteria;
+        public static readonly double[,] U;
+
+        static Core()
         {
-            "Исследовательские способности",
-            "Производственный стаж",
-            "Опыт преподавания технических дисциплин",
-            "Опыт преподавания теории информационных систем",
-            "Способность найти заказчика"
-        };
+            using (var context = new FuzzyDataContext())
+            {
+                Criteria = context.FuzzyCriterias.Select(x => x.Name).ToArray();
+
+                int rows = context.AlternativeToCriterias.Max(x => x.AlternativeId);
+                int cols = context.AlternativeToCriterias.Max(x => x.AlternativeId);
+                var u = new double[rows, cols];
+                foreach (var altToCriteria in context.AlternativeToCriterias)
+                {
+                    u[altToCriteria.AlternativeId - 1, altToCriteria.CriteriaId - 1] = altToCriteria.Value;
+                }
+                U = u;
+            }
+        }
 
         private static readonly Rule[] Rules =
         {
@@ -42,8 +51,9 @@ namespace DSS.DSS.FuzzyModel
             return result;
         }
 
-        public static FuzzyRankResult Compute(double[,] u)
+        public static FuzzyRankResult Compute(double[,] u, int iterationCount)
         {
+            double[] J = Enumerable.Range(0, iterationCount).Select(x => (double)x/(iterationCount - 1)).ToArray();
             double[][] uTransposed = Transpose(u);
 
             var m = Rules.Select(x => x.Apply(uTransposed)).ToArray();
@@ -61,12 +71,12 @@ namespace DSS.DSS.FuzzyModel
                 Debug.WriteLine("");
             }
 
-            var e = CalcE(finalD);
+            var e = CalcE(finalD, J);
 
             return new FuzzyRankResult(e.Max(), e);
         }
             
-        private static double[] CalcE(double[,] d)
+        private static double[] CalcE(double[,] d, double[] J)
         {
             double[] result = new double[d.GetLength(0)];
             double[] x = J;

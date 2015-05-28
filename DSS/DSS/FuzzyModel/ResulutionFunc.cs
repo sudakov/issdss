@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace DSS.DSS.FuzzyModel
 {
@@ -42,6 +43,24 @@ namespace DSS.DSS.FuzzyModel
         public static double Bad(double x)
         {
             return 1 - x;
+        }
+
+        public static Func<double, double> GetFunc(ResolutionEnum @enum)
+        {
+            switch (@enum)
+            {
+            case ResolutionEnum.Best:
+                return Best;
+            case ResolutionEnum.VeryGood:
+                return VeryGood;
+            case ResolutionEnum.Good:
+                return Good;
+            case ResolutionEnum.Norm:
+                return Norm;
+            case ResolutionEnum.Bad:
+                return Bad;
+            }
+            throw new InvalidEnumArgumentException();
         }
     }
 }
