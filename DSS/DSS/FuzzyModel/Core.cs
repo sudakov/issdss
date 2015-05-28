@@ -62,6 +62,7 @@ namespace DSS.DSS.FuzzyModel
 
             double[,] finalD = Intersect(d);
             Debug.WriteLine("_______");
+            Debug.WriteLine("FinalD:");
             for (int i = 0; i < finalD.GetLength(0); i++)
             {
                 for (int j = 0; j < finalD.GetLength(1); j++)
@@ -97,15 +98,18 @@ namespace DSS.DSS.FuzzyModel
         private static double CalcEi(FuzzyNumber[] arr)
         {
             Debug.WriteLine("_______");
+            Debug.WriteLine("E:");
             for (int i = 0; i < arr.Length; i++)
             {
                 Debug.Write(arr[i].U.ToString("N") + " ");
             }
             Debug.WriteLine("");
+            Debug.WriteLine("X:");
             for (int i = 0; i < arr.Length; i++)
             {
                 Debug.Write(arr[i].X.ToString("N") + " ");
             }
+            Debug.WriteLine("");
 
             Array.Sort(arr, (a, b) => a.U.CompareTo(b.U));
             var max = arr[arr.Length - 1].U; // last element
