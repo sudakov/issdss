@@ -1,5 +1,5 @@
 ﻿
-// Ширина ScrollBar'a
+// Ширина ScrollBar'uc
 var scrollBarSize
 
 window.onload = function () {
@@ -112,7 +112,7 @@ function SetTableSize() {
         screenHeight = document.body.clientHeight;
     }
 
-    // Вычисление ширины ScrollBar'a
+    // Вычисление ширины ScrollBar'uc
     scrollBarSize = document.getElementById('_DIV_Main').offsetHeight - document.getElementById('_DIV_SubMain').offsetHeight
 
     // Присваивание значений

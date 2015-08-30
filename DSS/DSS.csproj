@@ -72,11 +72,13 @@
     <Content Include="DSS\Assessment.aspx" />
     <Content Include="DSS\Controls\Authority.ascx" />
     <Content Include="DSS\Controls\Identity.ascx" />
+    <Content Include="DSS\Controls\MembershipFunctionControl.ascx" />
     <Content Include="DSS\Controls\Menu.ascx" />
     <Content Include="DSS\Controls\PersonDLL.ascx" />
     <Content Include="DSS\Criteria.aspx" />
     <Content Include="DSS\DirectValues.aspx" />
     <Content Include="DSS\EditJob.aspx" />
+    <Content Include="DSS\FuzzyRank.aspx" />
     <Content Include="DSS\Gantt.aspx" />
     <Content Include="DSS\Images\add.gif" />
     <Content Include="DSS\Images\alert.png" />
@@ -119,7 +121,6 @@
     <Content Include="DSS\PersonInfo.aspx" />
     <Content Include="DSS\PersonRole.aspx" />
     <Content Include="DSS\PersonTask.aspx" />
-    <Content Include="DSS\FuzzyRank.aspx" />
     <Content Include="DSS\Plan.aspx" />
     <Content Include="DSS\Ranking.aspx" />
     <Content Include="DSS\Registration.aspx" />
@@ -127,8 +128,33 @@
     <Content Include="DSS\Role.aspx" />
     <Content Include="DSS\RolePermission.aspx" />
     <Content Include="DSS\RolePerson.aspx" />
-    <Content Include="DSS\Scripts\jquery-1.11.3.min.js" />
+    <Content Include="DSS\Scripts\draggable-points.js" />
+    <Content Include="DSS\Scripts\highcharts.js" />
     <Content Include="DSS\Scripts\jsgantt.js" />
+    <Content Include="DSS\Scripts\modules\boost.js" />
+    <Content Include="DSS\Scripts\modules\boost.src.js" />
+    <Content Include="DSS\Scripts\modules\broken-axis.js" />
+    <Content Include="DSS\Scripts\modules\broken-axis.src.js" />
+    <Content Include="DSS\Scripts\modules\canvas-tools.js" />
+    <Content Include="DSS\Scripts\modules\canvas-tools.src.js" />
+    <Content Include="DSS\Scripts\modules\data.js" />
+    <Content Include="DSS\Scripts\modules\data.src.js" />
+    <Content Include="DSS\Scripts\modules\drilldown.js" />
+    <Content Include="DSS\Scripts\modules\drilldown.src.js" />
+    <Content Include="DSS\Scripts\modules\exporting.js" />
+    <Content Include="DSS\Scripts\modules\exporting.src.js" />
+    <Content Include="DSS\Scripts\modules\funnel.js" />
+    <Content Include="DSS\Scripts\modules\funnel.src.js" />
+    <Content Include="DSS\Scripts\modules\heatmap.js" />
+    <Content Include="DSS\Scripts\modules\heatmap.src.js" />
+    <Content Include="DSS\Scripts\modules\no-data-to-display.js" />
+    <Content Include="DSS\Scripts\modules\no-data-to-display.src.js" />
+    <Content Include="DSS\Scripts\modules\offline-exporting.js" />
+    <Content Include="DSS\Scripts\modules\offline-exporting.src.js" />
+    <Content Include="DSS\Scripts\modules\solid-gauge.js" />
+    <Content Include="DSS\Scripts\modules\solid-gauge.src.js" />
+    <Content Include="DSS\Scripts\modules\treemap.js" />
+    <Content Include="DSS\Scripts\modules\treemap.src.js" />
     <Content Include="DSS\Scripts\Slider.js" />
     <Content Include="DSS\Scripts\ValueTable.js" />
     <Content Include="DSS\Styles\jsgantt.css" />
@@ -136,7 +162,9 @@
     <Content Include="DSS\Task.aspx" />
     <Content Include="DSS\TaskPerson.aspx" />
     <Content Include="DSS\Value.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -187,6 +215,13 @@
     </Compile>
     <Compile Include="DSS\Controls\Identity.ascx.designer.cs">
       <DependentUpon>Identity.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\Controls\MembershipFunctionControl.ascx.cs">
+      <DependentUpon>MembershipFunctionControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Controls\MembershipFunctionControl.ascx.designer.cs">
+      <DependentUpon>MembershipFunctionControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="DSS\Controls\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
@@ -242,6 +277,13 @@
     <Compile Include="DSS\FuzzyModel\ResulutionFunc.cs" />
     <Compile Include="DSS\FuzzyModel\Rule.cs" />
     <Compile Include="DSS\FuzzyModel\RuleTypeEnum.cs" />
+    <Compile Include="DSS\FuzzyRank.aspx.cs">
+      <DependentUpon>FuzzyRank.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\FuzzyRank.aspx.designer.cs">
+      <DependentUpon>FuzzyRank.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DSS\Gantt.aspx.cs">
       <DependentUpon>Gantt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -304,13 +346,6 @@
     </Compile>
     <Compile Include="DSS\PersonTask.aspx.designer.cs">
       <DependentUpon>PersonTask.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DSS\FuzzyRank.aspx.cs">
-      <DependentUpon>FuzzyRank.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DSS\FuzzyRank.aspx.designer.cs">
-      <DependentUpon>FuzzyRank.aspx</DependentUpon>
     </Compile>
     <Compile Include="DSS\Plan.aspx.cs">
       <DependentUpon>Plan.aspx</DependentUpon>

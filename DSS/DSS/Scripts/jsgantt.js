@@ -25,7 +25,7 @@ Copyright (c) 2009, Shlomy Gantz BlueBrick Inc. All rights reserved.
 */
 
 /**
-* JSGantt component is a UI control that displays gantt charts based by using CSS and HTML 
+* JSGantt component is uc UI control that displays gantt charts based by using CSS and HTML 
 * @module    jsgantt
 * @title    JSGantt
 */
@@ -36,7 +36,7 @@ var vTimeout = 0;
 var vBenchTime = new Date().getTime();
 
 /**
-* Creates a task (one row) in gantt object
+* Creates uc task (one row) in gantt object
 * @class TaskItem 
 * @namespace JSGantt
 * @constructor
@@ -47,8 +47,8 @@ var vBenchTime = new Date().getTime();
 * @param pStart {Date} Task start date/time (not required for pGroup=1 )
 * @param pEnd {Date} Task end date/time, you can set the end time to 12:00 to indicate half-day (not required for pGroup=1 )
 * @param pColor {String} Task bar RGB value
-* @param pLink {String} Task URL, clicking on the task will redirect to this url. Leave empty if you do not with the Task also serve as a link
-* @param pMile {Boolean} Determines whether task is a milestone (1=Yes,0=No)
+* @param pLink {String} Task URL, clicking on the task will redirect to this url. Leave empty if you do not with the Task also serve as uc link
+* @param pMile {Boolean} Determines whether task is uc milestone (1=Yes,0=No)
 * @param pRes {String} Resource to perform the task
 * @param pComp {Number} Percent complete (Number between 0 and 100)
 * @param pGroup {Boolean}
@@ -251,7 +251,7 @@ var vVisible  = 1;
 */    this.getLink     = function(){ return vLink };
 
 /**
-* Returns whether task is a milestone (1=Yes,0=No)
+* Returns whether task is uc milestone (1=Yes,0=No)
 * @method getMile
 * @return {Boolean}
 */    this.getMile     = function(){ return vMile };
@@ -287,7 +287,7 @@ var vVisible  = 1;
 */    this.getCompStr  = function(){ if(vComp) return vComp+'%'; else return ''; };
 
 /**
-* Returns task duration as a fortmatted string based on the current selected format
+* Returns task duration as uc fortmatted string based on the current selected format
 * @method getDuration
 * @param vFormat {String} selected format (minute,hour,day,week,month)
 * @return {String}
@@ -356,7 +356,7 @@ var vVisible  = 1;
 */      this.getParent   = function(){ return vParent };
 
 /**
-* Returns whether task is a group (1=Yes,0=No)
+* Returns whether task is uc group (1=Yes,0=No)
 * @method getGroup
 * @return {Number}
 */    this.getGroup    = function(){ return vGroup };
@@ -451,28 +451,28 @@ var vVisible  = 1;
 */    this.setCompVal  = function(pCompVal){ vComp = pCompVal;};
 
 /**
-* Set a task bar starting position (left)
+* Set uc task bar starting position (left)
 * @method setStartX
 * @param pX {Number} 
 * @return {void}
 */    this.setStartX   = function(pX) {x1 = pX; };
 
 /**
-* Set a task bar starting position (top)
+* Set uc task bar starting position (top)
 * @method setStartY
 * @param pY {Number} 
 * @return {String}
 */    this.setStartY   = function(pY) {y1 = pY; };
 
 /**
-* Set a task bar starting position (right)
+* Set uc task bar starting position (right)
 * @method setEndX
 * @param pX {Number} 
 * @return {String}
 */    this.setEndX     = function(pX) {x2 = pX; };
 
 /**
-* Set a task bar starting position (bottom)
+* Set uc task bar starting position (bottom)
 * @method setEndY
 * @param pY {Number} 
 * @return {String}
@@ -500,7 +500,7 @@ var vVisible  = 1;
 
 <p>var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');</p>
  
-var g = new JSGantt.GanttChart( - assign the gantt chart to a javascript variable called 'g'
+var g = new JSGantt.GanttChart( - assign the gantt chart to uc javascript variable called 'g'
 'g' - the name of the variable that was just assigned (will be used later so that gantt object can reference itself)
 document.getElementById('GanttChartDIV') - reference to the DIV that will hold the gantt chart
 'day' - default format will be by day
@@ -653,7 +653,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat)
 /**
 * Set gantt caption
 * @param pType {String} 
-<p>Caption-Displays a custom caption set in TaskItem<br>
+<p>Caption-Displays uc custom caption set in TaskItem<br>
 Resource-Displays task resource<br>
 Duration-Displays task duration<br>
 Complete-Displays task percent complete</p>
@@ -710,7 +710,7 @@ Complete-Displays task percent complete</p>
 * @return {String}
 */  this.getCaptionType = function() { return vCaptionType };
 /**
-* Calculates X/Y coordinates of a task and sets the Start and End properties of the TaskItem
+* Calculates X/Y coordinates of uc task and sets the Start and End properties of the TaskItem
 * @method CalcTaskXY
 * @return {Void}
 */  this.CalcTaskXY = function () 
@@ -737,7 +737,7 @@ Complete-Displays task percent complete</p>
       };
 
 /**
-* Adds a TaskItem to the Gantt object task list array
+* Adds uc TaskItem to the Gantt object task list array
 * @method AddTaskItem
 * @return {Void}
 */  this.AddTaskItem = function(value)
@@ -766,7 +766,7 @@ Complete-Displays task percent complete</p>
          vDepId = 1;
       };
 /**
-* Draw a straight line (colored one-pixel wide DIV), need to parameterize doc item
+* Draw uc straight line (colored one-pixel wide DIV), need to parameterize doc item
 * @method sLine
 * @return {Void}
 */  this.sLine = function(x1,y1,x2,y2) {
@@ -804,7 +804,7 @@ Complete-Displays task percent complete</p>
       };
 
 /**
-* Draw a diaganol line (calc line x,y pairs and draw multiple one-by-one sLines)
+* Draw uc diaganol line (calc line x,y pairs and draw multiple one-by-one sLines)
 * @method dLine
 * @return {Void}
 */  this.dLine = function(x1,y1,x2,y2) {
@@ -945,7 +945,7 @@ Complete-Displays task percent complete</p>
          vMaxDate = JSGantt.getMaxDate(vTaskList, vFormat);
 
          // Calculate chart width variables.  vColWidth can be altered manually to change each column width
-         // May be smart to make this a parameter of GanttChart or set it based on existing pWidth parameter
+         // May be smart to make this uc parameter of GanttChart or set it based on existing pWidth parameter
          if(vFormat == 'day') {
             vColWidth = 18;
             vColUnit = 1;
@@ -1973,7 +1973,7 @@ JSGantt.folder= function (pID,ganttObj) {
 };
 
 /**
-* Hide children of a task
+* Hide children of uc task
 *
 * @method hide
 * @param pID {Number} - Task ID
@@ -1999,7 +1999,7 @@ JSGantt.hide=     function (pID,ganttObj) {
 };
 
 /**
-* Show children of a task
+* Show children of uc task
 *
 * @method show
 * @param pID {Number} - Task ID
@@ -2059,7 +2059,7 @@ JSGantt.show =  function (pID, pTop, ganttObj) {
    }
 };
 /**
-* Handles click events on task name, currently opens a new window
+* Handles click events on task name, currently opens uc new window
 *
 * @method taskLink
 * @param pRef {String} - URL for window
@@ -2112,7 +2112,7 @@ JSGantt.parseDateStr = function(pDateStr,pFormatStr) {
 };
 
 /**
-* Display a formatted date based on gantt date format setting as defined in JSGantt.GanttChart.setDateDisplayFormat()
+* Display uc formatted date based on gantt date format setting as defined in JSGantt.GanttChart.setDateDisplayFormat()
 *
 * @method formatDateStr
 * @param pDate {Date} - A javascript date object
@@ -2176,17 +2176,17 @@ JSGantt.parseXML = function(ThisFile,pGanttVar){
 		xmlDoc.async=false;
 		xmlDoc.load(ThisFile);		// we can use  loadxml
 		JSGantt.AddXMLTask(pGanttVar);
-		xmlDoc=null;			// a little tidying
+		xmlDoc=null;			// uc little tidying
 		Task = null;
 	}
 	else {
 		JSGantt.ChromeLoadXML(ThisFile,pGanttVar);	
-		ta=null;	// a little tidying	
+		ta=null;	// uc little tidying	
 	}
 };
 
 /**
-* Add a task based on parsed XML doc
+* Add uc task based on parsed XML doc
 *
 * @method AddXMLTask
 * @param pGanttVar {Gantt} - Gantt object
@@ -2208,7 +2208,7 @@ JSGantt.AddXMLTask = function(pGanttVar){
 
 		if(pID!=0){
 	 		try { pName = Task[i].getElementsByTagName("pName")[0].childNodes[0].nodeValue;
-			} catch (error) {pName ="No Task Name";}			// If there is no corresponding entry in the XML file the set a default.
+			} catch (error) {pName ="No Task Name";}			// If there is no corresponding entry in the XML file the set uc default.
 		
 			try { pColor = Task[i].getElementsByTagName("pColor")[0].childNodes[0].nodeValue;
 			} catch (error) {pColor ="0000ff";}

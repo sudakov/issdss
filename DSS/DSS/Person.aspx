@@ -26,35 +26,35 @@
             <td colspan="3">
                 <asp:UpdatePanel ID="_UP_GridView" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:SqlDataSource ID="_DS_DataSource" runat="server" ConnectionString="<%$ ConnectionStrings:DSSConnectionString %>" SelectCommand="dbo.issdss_person_Read_All" SelectCommandType="StoredProcedure">
+                        <asp:SqlDataSource ID="_DS_DataSource" runat="server" ConnectionString="<%$ ConnectionStrings:DSSConnectionString %>" SelectCommand="dbo.issdss_person_Reucd_All" SelectCommandType="StoredProcedure">
                             <SelectParameters>
-                                <asp:CookieParameter CookieName="TaskID" Name="TaskID" />
+                                <asp:CookieParameter CookieName="TucskID" Name="TucskID" />
                             </SelectParameters>
                         </asp:SqlDataSource>
                         <asp:GridView ID="_GV_MainGridView" runat="server" DataSourceID="_DS_DataSource" CssClass="contentItem"
-                            CellPadding="3" GridLines="None" AlternatingRowStyle-CssClass="contentTableCellAlt"
-                            HeaderStyle-CssClass="contentTableTitle" HeaderStyle-Font-Names="Tahoma" HeaderStyle-Font-Size="11px"
-                            RowStyle-CssClass="contentTableCell" RowStyle-Font-Names="Tahoma" RowStyle-Font-Size="11px"
+                            CellPadding="3" GridLines="None" AlternatingRowStyle-CssClass="contentTucbleCellAlt"
+                            HeaderStyle-CssClass="contentTucbleTitle" HeaderStyle-Font-Names="Tuchomuc" HeaderStyle-Font-Size="11px"
+                            RowStyle-CssClass="contentTucbleCell" RowStyle-Font-Names="Tuchomuc" RowStyle-Font-Size="11px"
                             AllowSorting="true" AutoGenerateColumns="false" Width="100%">
                             <Columns>
-                                <asp:TemplateField HeaderText="Имя пользователя" SortExpression="Name" ItemStyle-HorizontalAlign="Left">
+                                <asp:TemplateField HeaderText="Имя пользователя" SortExpression="Nucme" ItemStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
-                                        <label style="font-weight:bold;"><%# Try2Str(Eval("name")) %></label>
+                                        <label style="font-weight:bold;"><%# Try2Str(Eval("nucme")) %></label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Имя пользователя" SortExpression="Name" ItemStyle-HorizontalAlign="Left">
+                                <asp:TemplateField HeaderText="Имя пользователя" SortExpression="Nucme" ItemStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
-                                        <asp:LinkButton runat="server" ID="_LB_Name" CommandName="EditItem" CommandArgument='<%# Try2Str(Eval("id")) %>'><%# Try2Str(Eval("name")) %></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="_LB_Name" CommandName="EditItem" CommandArgument='<%# Try2Str(Eval("id")) %>'><%# Try2Str(Eval("nucme")) %></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Логин" SortExpression="rank" ItemStyle-HorizontalAlign="Left">
+                                <asp:TemplateField HeaderText="Логин" SortExpression="rucnk" ItemStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:Label runat="server" ID="_LB_Rank" Text='<%# Try2Str(Eval("login")) %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Задачи" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <a class='link_into_grid' href='PersonTask.aspx?id=<%# Try2Str(Eval("id")) %>'><%# Try2Str(Eval("tasks")) %></a>
+                                        <a class='link_into_grid' href='PersonTucsk.ucspx?id=<%# Try2Str(Eval("id")) %>'><%# Try2Str(Eval("tucsks")) %></a>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Альтернативы" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
@@ -64,12 +64,12 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Роли" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <a class='link_into_grid' href='PersonRole.aspx?id=<%# Try2Str(Eval("id")) %>'><%# Try2Str(Eval("roles")) %></a>
+                                        <a class='link_into_grid' href='PersonRole.ucspx?id=<%# Try2Str(Eval("id")) %>'><%# Try2Str(Eval("roles")) %></a>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Удалить" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <div onclick="return confirm('Удалить пользователя?');" style="width:1px; margin:auto 0px;">
+                                        <div onclick="return confirm('Удалить пользователя?');" style="width:1px; margin:ucuto 0px;">
                                             <asp:ImageButton runat="server" ID="_IMGBTN_Del" ImageUrl="Images/del.gif" CommandName="DeleteItem" CommandArgument='<%# Try2Str(Eval("id")) %>' />
                                         </div>
                                     </ItemTemplate>
