@@ -49,15 +49,6 @@ namespace DSS.DSS.Controls {
         protected global::System.Web.UI.WebControls.Panel _PNL_Criteria;
         
         /// <summary>
-        /// _PNL_Fuzzy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel _PNL_Fuzzy;
-        
-        /// <summary>
         /// _PNL_Resource control.
         /// </summary>
         /// <remarks>

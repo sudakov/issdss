@@ -46,7 +46,7 @@ namespace DSS.DSS.Controls
                     Context.Response.Cookies.Add(new HttpCookie("UserID", Reader["id"].ToString()));
                     Context.Response.Cookies.Add(new HttpCookie("PersonID", "-1"));
                     if (Reader["task_id"] != DBNull.Value)
-                        Context.Response.Cookies.Add(new HttpCookie("TaskID", Reader["task_id"].ToString()));
+                        Context.Response.Cookies.Add(new HttpCookie("TaskID", "6"));
                 }
             }
 

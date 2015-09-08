@@ -29,8 +29,6 @@ namespace DSS.DSS.Controls
                 _PNL_Person.Visible = false;
             if (((Label)Parent.FindControl("_LBL_RoleView")).Text == "0")
                 _PNL_Role.Visible = false;
-            if (((Label)Parent.FindControl("_LBL_RoleView")).Text == "0")
-                _PNL_Fuzzy.Visible = false;
         }
     }
 }

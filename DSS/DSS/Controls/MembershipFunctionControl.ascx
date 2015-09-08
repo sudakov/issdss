@@ -10,8 +10,7 @@
             chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'container',
-                    animation: false,
-                    ignoreHiddenSeries: false
+                    animation: false
                 },
 
                 credits: false, 
@@ -21,7 +20,7 @@
                 },
 
                 xAxis: {
-                    categories: ['0-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60+']
+                    categories: [<%# Categories %>]
                 },
 
                 plotOptions: {
@@ -41,39 +40,20 @@
 
                 series: [
                     {
-                        showInLegend: false,
-                        data: [null, null, null, null, null, null, null],
+                        data: [<%# Data %>],
                         draggableY: true,
                         dragMinY: 0,
                         dragMaxY: 1,
-                        name: "Hidden",
-                        visible: false
+                        name: '<%# CriteriaName %>'
                     }
                 ]
 
             });
         });
-
-        function AddSeries() {
-            var tbSeries = document.getElementById('<%= tbSeries.ClientID %>');
-            chart.addSeries({
-                data: [0, 0, 0, 0, 0, 0, 0],
-                draggableY: true,
-                dragMinY: 0,
-                dragMaxY: 1,
-                name: tbSeries.value,
-                visible: true
-            });
-        }
-
+        
         function Save() {
-            var savedSeries = JSON.stringify(chart.series.map(function (s) {
-                var data = s.data.map(function (a) {
-                    return a.y;
-                });
-                var result = {};
-                result[s.name] = data;
-                return result;
+            var savedSeries = JSON.stringify(chart.series[0].data.map(function (a) {
+                return a.y;
             }));
 
             var hfData = document.getElementById('<%= hfData.ClientID %>');
@@ -83,12 +63,8 @@
 
     <div id="container" style="height: 400px"></div>
     <div>
-        <asp:Label runat="server" Text="Имя нового параметра"></asp:Label>
-        <asp:TextBox runat="server" ID="tbSeries"></asp:TextBox>
-        <input type="button" onclick="AddSeries()" value="Добавить" />
-    </div>
-    <div>
-        <input type="button" onclick="Save()" value="Save" />
+        <asp:Button runat="server" OnClientClick="Save()" OnClick="SaveOnClick" Text="Сохранить значения"/>
         <asp:HiddenField runat="server" ID="hfData" />
+        <asp:HiddenField runat="server" ID="hfKeys"/>
     </div>
 </div>

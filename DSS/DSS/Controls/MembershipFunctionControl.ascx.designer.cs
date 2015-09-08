@@ -13,15 +13,6 @@ namespace DSS.DSS.Controls {
     public partial class MembershipFunctionControl {
         
         /// <summary>
-        /// tbSeries control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSeries;
-        
-        /// <summary>
         /// hfData control.
         /// </summary>
         /// <remarks>
@@ -29,5 +20,14 @@ namespace DSS.DSS.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfData;
+        
+        /// <summary>
+        /// hfKeys control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfKeys;
     }
 }

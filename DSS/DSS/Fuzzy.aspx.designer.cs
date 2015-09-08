@@ -11,5 +11,14 @@ namespace DSS.DSS {
     
     
     public partial class Fuzzy {
+        
+        /// <summary>
+        /// mfControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DSS.DSS.Controls.MembershipFunctionControl mfControl;
     }
 }

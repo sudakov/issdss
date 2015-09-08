@@ -105,6 +105,9 @@ namespace DSS
     partial void Insertrole_permission(role_permission instance);
     partial void Updaterole_permission(role_permission instance);
     partial void Deleterole_permission(role_permission instance);
+    partial void Insertcrit_fuzzy(crit_fuzzy instance);
+    partial void Updatecrit_fuzzy(crit_fuzzy instance);
+    partial void Deletecrit_fuzzy(crit_fuzzy instance);
     #endregion
 		
 		public DssDataContext() : 
@@ -337,6 +340,14 @@ namespace DSS
 			}
 		}
 		
+		public System.Data.Linq.Table<crit_fuzzy> crit_fuzzies
+		{
+			get
+			{
+				return this.GetTable<crit_fuzzy>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_alternative_Delete")]
 		public int issdss_alternative_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AlternativeID", DbType="Int")] System.Nullable<int> alternativeID)
 		{
@@ -344,10 +355,10 @@ namespace DSS
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_plandss")]
-		public void prc_plandss([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> plan_id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_plandss", IsComposable=true)]
+		public object prc_plandss([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> plan_id)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plan_id);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plan_id).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_alternative_Insert")]
@@ -448,22 +459,22 @@ namespace DSS
 			return ((ISingleResult<issdss_crit_value_Read_RanksResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_crit_value_Update")]
-		public void issdss_crit_value_Update([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement d, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> alternative_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> person_id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_crit_value_Update", IsComposable=true)]
+		public object issdss_crit_value_Update([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement d, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> alternative_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> person_id)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), d, alternative_id, person_id);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), d, alternative_id, person_id).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_criteria_ChooseParent")]
-		public void issdss_criteria_ChooseParent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_criteria_ChooseParent", IsComposable=true)]
+		public object issdss_criteria_ChooseParent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_criteria_Delete")]
-		public void issdss_criteria_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_criteria_Delete", IsComposable=true)]
+		public object issdss_criteria_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_criteria_Insert")]
@@ -634,10 +645,10 @@ namespace DSS
 			return ((ISingleResult<issdss_job_resource_ReadResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_job_resource_Update")]
-		public void issdss_job_resource_Update([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement d, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="JobID", DbType="Int")] System.Nullable<int> jobID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_job_resource_Update", IsComposable=true)]
+		public object issdss_job_resource_Update([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement d, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="JobID", DbType="Int")] System.Nullable<int> jobID)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), d, jobID);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), d, jobID).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_job_Update")]
@@ -668,10 +679,10 @@ namespace DSS
 			return ((ISingleResult<issdss_pair_crit_comp_ReadResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_pair_crit_comp_Update")]
-		public void issdss_pair_crit_comp_Update([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement d, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> parent_crit_id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_pair_crit_comp_Update", IsComposable=true)]
+		public object issdss_pair_crit_comp_Update([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement d, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> parent_crit_id)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), d, parent_crit_id);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), d, parent_crit_id).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.issdss_permission_Read")]
@@ -989,22 +1000,22 @@ namespace DSS
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_calculate_task")]
-		public void prc_calculate_task([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> task_id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_calculate_task", IsComposable=true)]
+		public object prc_calculate_task([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> task_id)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), task_id);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), task_id).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_criteria_copy")]
-		public void prc_criteria_copy([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> src_task, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> target_task)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_criteria_copy", IsComposable=true)]
+		public object prc_criteria_copy([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> src_task, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> target_task)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), src_task, target_task);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), src_task, target_task).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_dssplan")]
-		public void prc_dssplan([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> plandss)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_dssplan", IsComposable=true)]
+		public object prc_dssplan([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> plandss)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plandss);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plandss).ReturnValue));
 		}
 	}
 	
@@ -2164,6 +2175,8 @@ namespace DSS
 		
 		private EntitySet<resource> _resources;
 		
+		private EntityRef<crit_fuzzy> _crit_fuzzy;
+		
 		private EntityRef<criteria> _criteria1;
 		
 		private EntityRef<task> _task;
@@ -2207,6 +2220,7 @@ namespace DSS
 			this._pair_crit_comps1 = new EntitySet<pair_crit_comp>(new Action<pair_crit_comp>(this.attach_pair_crit_comps1), new Action<pair_crit_comp>(this.detach_pair_crit_comps1));
 			this._preferences = new EntitySet<preference>(new Action<preference>(this.attach_preferences), new Action<preference>(this.detach_preferences));
 			this._resources = new EntitySet<resource>(new Action<resource>(this.attach_resources), new Action<resource>(this.detach_resources));
+			this._crit_fuzzy = default(EntityRef<crit_fuzzy>);
 			this._criteria1 = default(EntityRef<criteria>);
 			this._task = default(EntityRef<task>);
 			this._method = default(EntityRef<method>);
@@ -2533,6 +2547,35 @@ namespace DSS
 			set
 			{
 				this._resources.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="criteria_crit_fuzzy", Storage="_crit_fuzzy", ThisKey="id", OtherKey="id", IsUnique=true, IsForeignKey=false)]
+		public crit_fuzzy crit_fuzzy
+		{
+			get
+			{
+				return this._crit_fuzzy.Entity;
+			}
+			set
+			{
+				crit_fuzzy previousValue = this._crit_fuzzy.Entity;
+				if (((previousValue != value) 
+							|| (this._crit_fuzzy.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._crit_fuzzy.Entity = null;
+						previousValue.criteria = null;
+					}
+					this._crit_fuzzy.Entity = value;
+					if ((value != null))
+					{
+						value.criteria = this;
+					}
+					this.SendPropertyChanged("crit_fuzzy");
+				}
 			}
 		}
 		
@@ -7450,6 +7493,205 @@ namespace DSS
 						this._role_id = default(int);
 					}
 					this.SendPropertyChanged("role");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.crit_fuzzy")]
+	public partial class crit_fuzzy : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _critId;
+		
+		private string _name;
+		
+		private int _position;
+		
+		private double _value;
+		
+		private EntityRef<criteria> _criteria;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OncritIdChanging(int value);
+    partial void OncritIdChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnpositionChanging(int value);
+    partial void OnpositionChanged();
+    partial void OnvalueChanging(double value);
+    partial void OnvalueChanged();
+    #endregion
+		
+		public crit_fuzzy()
+		{
+			this._criteria = default(EntityRef<criteria>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					if (this._criteria.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_critId", DbType="Int NOT NULL")]
+		public int critId
+		{
+			get
+			{
+				return this._critId;
+			}
+			set
+			{
+				if ((this._critId != value))
+				{
+					this.OncritIdChanging(value);
+					this.SendPropertyChanging();
+					this._critId = value;
+					this.SendPropertyChanged("critId");
+					this.OncritIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position", DbType="Int NOT NULL")]
+		public int position
+		{
+			get
+			{
+				return this._position;
+			}
+			set
+			{
+				if ((this._position != value))
+				{
+					this.OnpositionChanging(value);
+					this.SendPropertyChanging();
+					this._position = value;
+					this.SendPropertyChanged("position");
+					this.OnpositionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_value", DbType="Float NOT NULL")]
+		public double value
+		{
+			get
+			{
+				return this._value;
+			}
+			set
+			{
+				if ((this._value != value))
+				{
+					this.OnvalueChanging(value);
+					this.SendPropertyChanging();
+					this._value = value;
+					this.SendPropertyChanged("value");
+					this.OnvalueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="criteria_crit_fuzzy", Storage="_criteria", ThisKey="id", OtherKey="id", IsForeignKey=true)]
+		public criteria criteria
+		{
+			get
+			{
+				return this._criteria.Entity;
+			}
+			set
+			{
+				criteria previousValue = this._criteria.Entity;
+				if (((previousValue != value) 
+							|| (this._criteria.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._criteria.Entity = null;
+						previousValue.crit_fuzzy = null;
+					}
+					this._criteria.Entity = value;
+					if ((value != null))
+					{
+						value.crit_fuzzy = this;
+						this._id = value.id;
+					}
+					else
+					{
+						this._id = default(int);
+					}
+					this.SendPropertyChanged("criteria");
 				}
 			}
 		}

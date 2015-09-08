@@ -10,5 +10,5 @@
     <%= DefaultText %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <uc:MembershipFunctionControl runat="server"></uc:MembershipFunctionControl>
+    <uc:MembershipFunctionControl runat="server" ID="mfControl"></uc:MembershipFunctionControl>
 </asp:Content>
