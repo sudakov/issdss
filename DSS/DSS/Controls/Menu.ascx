@@ -98,6 +98,27 @@
         </td>
     </tr>
     </asp:Panel>
+    
+    
+    <asp:Panel runat="server" ID="_PNL_Fuzzy">
+    <tr>
+        <td class="menuItem">
+            <div class="menuLabel" onclick="window.location.href = 'Fuzzy.aspx';">
+                <table class="userMenuItem" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="spacing"></td>
+                        <td class="point"></td>
+                        <td class="content">Нечеткое ранжирование</td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="menuSep">
+        </td>
+    </tr>
+    </asp:Panel>
 
     <asp:Panel runat="server" ID="_PNL_Resource">
     <tr>
