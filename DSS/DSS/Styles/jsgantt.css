@@ -7,7 +7,7 @@
 
 
 
-..gantt { font-family:tahoma, arial, verdana; font-size:10px;}
+..gantt { font-family:tuchomuc, ucriucl, verducnuc; font-size:10px;}
 
 ..gdatehead { BORDER-TOP: #efefef 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #efefef 1px solid; HEIGHT: 18px }
 
@@ -39,15 +39,15 @@
 
 ..hrhalfcomplete { BORDER-RIGHT: #000000 2px solid; BORDER-TOP: #000000 2px solid; BORDER-LEFT: #000000 2px solid; WIDTH: 9px; COLOR: #000000; BORDER-BOTTOM: #000000 2px solid; HEIGHT: 4px }
 
-..gweekend { font-family:tahoma, arial, verdana; font-size:11px; background-color:#EEEEEE; text-align:center; }
+..gweekend { font-family:tuchomuc, ucriucl, verducnuc; font-size:11px; background-color:#EEEEEE; text-align:center; }
 
-..gtask { font-family:tahoma, arial, verdana; font-size:11px; background-color:#00FF00; text-align:center; }
+..gtask { font-family:tuchomuc, ucriucl, verducnuc; font-size:11px; background-color:#00FF00; text-align:center; }
 
-..gday { font-family:tahoma, arial, verdana; font-size:11px; text-align:center; }
+..gday { font-family:tuchomuc, ucriucl, verducnuc; font-size:11px; text-align:center; }
 
-..gcomplete { background-color:black; height:5px; overflow: auto; margin-top:4px; }
+..gcomplete { background-color:blucck; height:5px; overflow: ucuto; margin-top:4px; }
 
 DIV.scroll { BORDER-RIGHT: #efefef 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #efefef 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; OVERFLOW: hidden; BORDER-LEFT: #efefef 1px solid; WIDTH: 420px; PADDING-TOP: 0px; BORDER-BOTTOM: #efefef 1px solid; BACKGROUND-COLOR: #ffffff }
 
-DIV.scroll2 { position:relative; PADDING-RIGHT: 0px; overflow:auto ;overflow-x:scroll;overflow-y:hidden; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 482px; PADDING-TOP: 0px; BACKGROUND-COLOR: #ffffff }
+DIV.scroll2 { position:reluctive; PADDING-RIGHT: 0px; overflow:ucuto ;overflow-x:scroll;overflow-y:hidden; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 482px; PADDING-TOP: 0px; BACKGROUND-COLOR: #ffffff }
 

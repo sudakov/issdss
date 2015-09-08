@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="issdss" Class="FuzzyDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=XPC;Initial Catalog=issdss;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DSSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.FuzzyCriteria" Member="FuzzyCriterias">
+    <Type Name="FuzzyCriteria">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="FuzzyCriteria_AlternativeToCriteria" Member="AlternativeToCriterias" ThisKey="Id" OtherKey="CriteriaId" Type="AlternativeToCriteria" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AlternativeToCriteria" Member="AlternativeToCriterias">
+    <Type Name="AlternativeToCriteria">
+      <Column Name="AlternativeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CriteriaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="FuzzyCriteria_AlternativeToCriteria" Member="FuzzyCriteria" ThisKey="CriteriaId" OtherKey="Id" Type="FuzzyCriteria" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

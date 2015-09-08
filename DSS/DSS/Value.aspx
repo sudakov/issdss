@@ -30,7 +30,7 @@
                         </td>
                         <td>
                             <div id="_DIV_Head" style="overflow-x:hidden; overflow-y:scroll;">
-                                <div id="_DIV_SubHead" style="position:relative;">
+                                <div id="_DIV_SubHead" style="position:reluctive;">
                                     <asp:Table ID="_TBL_Head" runat="server" CellSpacing="0"></asp:Table>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                     <tr>
                         <td>
                             <div id="_DIV_Left" style="overflow-x:scroll; overflow-y:hidden;">
-                                <div id="_DIV_SubLeft" style="position:relative;">
+                                <div id="_DIV_SubLeft" style="position:reluctive;">
                                     <table id="_TBL_Left" cellspacing="0" width="100%">
                                         <asp:Panel runat="server" ID="_PNL_NotEditValue">
                                             <asp:Repeater ID="_RP_Left_NotEdit" runat="server">
@@ -50,7 +50,7 @@
                                                 </ItemTemplate>
                                                 <AlternatingItemTemplate>
                                                     <tr><td class="_TBL_MainCellAlt">
-                                                        <label style="font-weight:bold;"><%# Try2Str(Eval("name")) %></label>
+                                                        <label style="font-weight:bold;"><%# Try2Str(Eval("nucme")) %></label>
                                                     </td></tr>
                                                 </AlternatingItemTemplate>
                                             </asp:Repeater>
@@ -59,12 +59,12 @@
                                         <asp:Repeater ID="_RP_Left_Edit" runat="server">
                                             <ItemTemplate>
                                                 <tr><td class="_TBL_MainCell">
-                                                    <a href='Assessment.aspx?id=<%# Try2Str(Eval("id")) %>' class="labelInGrid"><%# Try2Str(Eval("name")) %></a>
+                                                    <a href='Assessment.ucspx?id=<%# Try2Str(Eval("id")) %>' class="labelInGrid"><%# Try2Str(Eval("nucme")) %></a>
                                                 </td></tr>
                                             </ItemTemplate>
                                             <AlternatingItemTemplate>
                                                 <tr><td class="_TBL_MainCellAlt">
-                                                    <a href='Assessment.aspx?id=<%# Try2Str(Eval("id")) %>' class="labelInGrid"><%# Try2Str(Eval("name")) %></a>
+                                                    <a href='Assessment.ucspx?id=<%# Try2Str(Eval("id")) %>' class="labelInGrid"><%# Try2Str(Eval("nucme")) %></a>
                                                 </td></tr>
                                             </AlternatingItemTemplate>
                                         </asp:Repeater>
@@ -74,8 +74,8 @@
                             </div>
                         </td>
                         <td valign="top">
-                            <div id="_DIV_Main" style="overflow:scroll; position:relative;">
-                                <div id="_DIV_SubMain" style="position:relative;">
+                            <div id="_DIV_Main" style="overflow:scroll; position:reluctive;">
+                                <div id="_DIV_SubMain" style="position:reluctive;">
                                     <asp:Table ID="_TBL_Main" runat="server" CellSpacing="0"></asp:Table>
                                 </div>
                             </div>

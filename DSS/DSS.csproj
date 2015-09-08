@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -14,6 +15,17 @@
     <AssemblyName>DSS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,7 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -55,11 +72,13 @@
     <Content Include="DSS\Assessment.aspx" />
     <Content Include="DSS\Controls\Authority.ascx" />
     <Content Include="DSS\Controls\Identity.ascx" />
+    <Content Include="DSS\Controls\MembershipFunctionControl.ascx" />
     <Content Include="DSS\Controls\Menu.ascx" />
     <Content Include="DSS\Controls\PersonDLL.ascx" />
     <Content Include="DSS\Criteria.aspx" />
     <Content Include="DSS\DirectValues.aspx" />
     <Content Include="DSS\EditJob.aspx" />
+    <Content Include="DSS\FuzzyRank.aspx" />
     <Content Include="DSS\Gantt.aspx" />
     <Content Include="DSS\Images\add.gif" />
     <Content Include="DSS\Images\alert.png" />
@@ -109,7 +128,33 @@
     <Content Include="DSS\Role.aspx" />
     <Content Include="DSS\RolePermission.aspx" />
     <Content Include="DSS\RolePerson.aspx" />
+    <Content Include="DSS\Scripts\draggable-points.js" />
+    <Content Include="DSS\Scripts\highcharts.js" />
     <Content Include="DSS\Scripts\jsgantt.js" />
+    <Content Include="DSS\Scripts\modules\boost.js" />
+    <Content Include="DSS\Scripts\modules\boost.src.js" />
+    <Content Include="DSS\Scripts\modules\broken-axis.js" />
+    <Content Include="DSS\Scripts\modules\broken-axis.src.js" />
+    <Content Include="DSS\Scripts\modules\canvas-tools.js" />
+    <Content Include="DSS\Scripts\modules\canvas-tools.src.js" />
+    <Content Include="DSS\Scripts\modules\data.js" />
+    <Content Include="DSS\Scripts\modules\data.src.js" />
+    <Content Include="DSS\Scripts\modules\drilldown.js" />
+    <Content Include="DSS\Scripts\modules\drilldown.src.js" />
+    <Content Include="DSS\Scripts\modules\exporting.js" />
+    <Content Include="DSS\Scripts\modules\exporting.src.js" />
+    <Content Include="DSS\Scripts\modules\funnel.js" />
+    <Content Include="DSS\Scripts\modules\funnel.src.js" />
+    <Content Include="DSS\Scripts\modules\heatmap.js" />
+    <Content Include="DSS\Scripts\modules\heatmap.src.js" />
+    <Content Include="DSS\Scripts\modules\no-data-to-display.js" />
+    <Content Include="DSS\Scripts\modules\no-data-to-display.src.js" />
+    <Content Include="DSS\Scripts\modules\offline-exporting.js" />
+    <Content Include="DSS\Scripts\modules\offline-exporting.src.js" />
+    <Content Include="DSS\Scripts\modules\solid-gauge.js" />
+    <Content Include="DSS\Scripts\modules\solid-gauge.src.js" />
+    <Content Include="DSS\Scripts\modules\treemap.js" />
+    <Content Include="DSS\Scripts\modules\treemap.src.js" />
     <Content Include="DSS\Scripts\Slider.js" />
     <Content Include="DSS\Scripts\ValueTable.js" />
     <Content Include="DSS\Styles\jsgantt.css" />
@@ -117,7 +162,9 @@
     <Content Include="DSS\Task.aspx" />
     <Content Include="DSS\TaskPerson.aspx" />
     <Content Include="DSS\Value.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -169,6 +216,13 @@
     <Compile Include="DSS\Controls\Identity.ascx.designer.cs">
       <DependentUpon>Identity.ascx</DependentUpon>
     </Compile>
+    <Compile Include="DSS\Controls\MembershipFunctionControl.ascx.cs">
+      <DependentUpon>MembershipFunctionControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\Controls\MembershipFunctionControl.ascx.designer.cs">
+      <DependentUpon>MembershipFunctionControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="DSS\Controls\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -210,6 +264,25 @@
     </Compile>
     <Compile Include="DSS\EditJob.aspx.designer.cs">
       <DependentUpon>EditJob.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\FuzzyModel\Core.cs" />
+    <Compile Include="DSS\FuzzyModel\DAL\FuzzyDataContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FuzzyDataContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DSS\FuzzyModel\FuzzyNumber.cs" />
+    <Compile Include="DSS\FuzzyModel\FuzzyRankResult.cs" />
+    <Compile Include="DSS\FuzzyModel\ResolutionEnum.cs" />
+    <Compile Include="DSS\FuzzyModel\ResulutionFunc.cs" />
+    <Compile Include="DSS\FuzzyModel\Rule.cs" />
+    <Compile Include="DSS\FuzzyModel\RuleTypeEnum.cs" />
+    <Compile Include="DSS\FuzzyRank.aspx.cs">
+      <DependentUpon>FuzzyRank.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DSS\FuzzyRank.aspx.designer.cs">
+      <DependentUpon>FuzzyRank.aspx</DependentUpon>
     </Compile>
     <Compile Include="DSS\Gantt.aspx.cs">
       <DependentUpon>Gantt.aspx</DependentUpon>
@@ -346,7 +419,6 @@
     </Compile>
     <Compile Include="DSS\Value.aspx.cs">
       <DependentUpon>Value.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DSS\Value.aspx.designer.cs">
       <DependentUpon>Value.aspx</DependentUpon>
@@ -356,9 +428,31 @@
   <ItemGroup>
     <Content Include="DSS\Site.Master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DSS\FuzzyModel\DAL\FuzzyDataContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>FuzzyDataContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DSS\FuzzyModel\DAL\FuzzyDataContext.dbml.layout">
+      <DependentUpon>FuzzyDataContext.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
