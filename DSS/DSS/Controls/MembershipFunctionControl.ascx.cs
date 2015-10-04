@@ -46,27 +46,46 @@ namespace DSS.DSS.Controls
                 var dependedCrit = context.criterias.First(x => x.parent_crit_id == CriteriaId);
                 CriteriaName = dependedCrit.name;
 
-                var depended = GetDepended(context);
+                bool isNumber = criteria.is_number != 0;
+                ViewState.Add("isNumber", isNumber);
 
-                Categories = string.Join(",", depended.Select(x => "'" + x.name + "'"));
-                Data = string.Join(",", depended.Select(x => x.value.ToString(CultureInfo.InvariantCulture)));
+                if (isNumber)
+                {
+                    var depended = GetDependedValues(context);  
+                    Categories = string.Join(",", depended.Select(x => "'" + x.value + "'"));
+                    Data = string.Join(",", depended.Select(x => x.value.Value.ToString(CultureInfo.InvariantCulture)));
+                }
+                else
+                {
+                    var depended = GetDependedScale(context);
+                    Categories = string.Join(",", depended.Select(x => "'" + x.name + "'"));
+                    Data = string.Join(",", depended.Select(x => x.rank.Value.ToString(CultureInfo.InvariantCulture)));
+                }
             }
             hfKeys.Value = "[" + Categories + "]";
         }
 
-        private List<crit_fuzzy> GetDepended(DssDataContext context)
+        private List<crit_value> GetDependedValues(DssDataContext context)
         {
-            return (from critFuzzy in context.crit_fuzzies
-                    where critFuzzy.critId == CriteriaId
-                    orderby critFuzzy.position
-                    select critFuzzy).ToList();
+            return (from crit in context.crit_values
+                    where crit.criteria_id == CriteriaId
+                    orderby crit.value
+                    select crit).ToList();
+        }
+
+        private List<crit_scale> GetDependedScale(DssDataContext context)
+        {
+            return (from crit in context.crit_scales
+                    where crit.criteria_id == CriteriaId
+                    orderby crit.ord
+                    select crit).ToList();
         }
 
         protected void SaveOnClick(object sender, EventArgs e)
         {
             string[] keys = JsonConvert.DeserializeObject<string[]>(hfKeys.Value);
-            double[] values = JsonConvert.DeserializeObject<double[]>(hfData.Value);
-            var dictionary = new Dictionary<string, double>(keys.Length);
+            decimal[] values = JsonConvert.DeserializeObject<decimal[]>(hfData.Value);
+            var dictionary = new Dictionary<string, decimal>(keys.Length);
             for (int i = 0; i < keys.Length; i++)
             {
                 dictionary.Add(keys[i], values[i]);
@@ -74,15 +93,24 @@ namespace DSS.DSS.Controls
 
             using (var context = new DssDataContext())
             {
-                var depended = GetDepended(context);
                 bool hasChanges = false;
-                foreach (var critFuzzy in depended)
+                bool isNumber = (bool) ViewState["isNumber"];
+
+                if (isNumber)
                 {
-                    double newValue = dictionary[critFuzzy.name];
-                    if (Math.Abs(critFuzzy.value - newValue) > double.Epsilon)
+//TODO
+                }
+                else
+                {
+                    var depended = GetDependedScale(context);
+                    foreach (var critFuzzy in depended)
                     {
-                        critFuzzy.value = newValue;
-                        hasChanges = true;
+                        decimal newValue = dictionary[critFuzzy.name];
+                        if (critFuzzy.rank.Value != newValue)
+                        {
+                            critFuzzy.rank = newValue;
+                            hasChanges = true;
+                        }
                     }
                 }
                 if (hasChanges)
