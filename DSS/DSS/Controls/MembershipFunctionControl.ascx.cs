@@ -22,7 +22,7 @@ namespace DSS.DSS.Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            FunctionName = "Скорость автомобиля";
+            
         }
 
         protected override void OnPreRender(EventArgs e)
