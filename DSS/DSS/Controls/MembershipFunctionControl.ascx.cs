@@ -49,18 +49,18 @@ namespace DSS.DSS.Controls
                 bool isNumber = criteria.is_number != 0;
                 ViewState.Add("isNumber", isNumber);
 
-                if (isNumber)
-                {
-                    var depended = GetDependedValues(context);  
-                    Categories = string.Join(",", depended.Select(x => "'" + x.value + "'"));
-                    Data = string.Join(",", depended.Select(x => x.value.Value.ToString(CultureInfo.InvariantCulture)));
-                }
-                else
-                {
+                //if (isNumber)
+                //{
+                //    var depended = GetDependedValues(context);  
+                //    Categories = string.Join(",", depended.Select(x => "'" + x.value + "'"));
+                //    Data = string.Join(",", depended.Select(x => x.value.Value.ToString(CultureInfo.InvariantCulture)));
+                //}
+                //else
+                //{
                     var depended = GetDependedScale(context);
                     Categories = string.Join(",", depended.Select(x => "'" + x.name + "'"));
                     Data = string.Join(",", depended.Select(x => x.rank.Value.ToString(CultureInfo.InvariantCulture)));
-                }
+          //      }
             }
             hfKeys.Value = "[" + Categories + "]";
         }
@@ -96,12 +96,12 @@ namespace DSS.DSS.Controls
                 bool hasChanges = false;
                 bool isNumber = (bool) ViewState["isNumber"];
 
-                if (isNumber)
-                {
-//TODO
-                }
-                else
-                {
+//                if (isNumber)
+//                {
+////TODO
+//                }
+//                else
+//                {
                     var depended = GetDependedScale(context);
                     foreach (var critFuzzy in depended)
                     {
@@ -112,10 +112,11 @@ namespace DSS.DSS.Controls
                             hasChanges = true;
                         }
                     }
-                }
+                //}
                 if (hasChanges)
                     context.SubmitChanges();
             }
+            Response.Redirect("Criteria.aspx", true);
         }
     }
 }
