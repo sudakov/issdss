@@ -163,6 +163,9 @@
     <Content Include="DSS\Task.aspx" />
     <Content Include="DSS\TaskPerson.aspx" />
     <Content Include="DSS\Value.aspx" />
+    <None Include="NewShema.sql" />
+    <None Include="NewData.sql" />
+    <Content Include="EntireDatabase.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
