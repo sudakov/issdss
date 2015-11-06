@@ -1,0 +1,1146 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="issdss" Class="DssDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=XPC;Initial Catalog=issdss;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DSSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.alternative" Member="alternatives">
+    <Type Name="alternative">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Association Name="alternative_crit_value" Member="crit_values" ThisKey="id" OtherKey="alternative_id" Type="crit_value" />
+      <Association Name="alternative_job" Member="jobs" ThisKey="id" OtherKey="alternative_id" Type="job" />
+      <Association Name="alternative_person_alternative" Member="person_alternatives" ThisKey="id" OtherKey="alternative_id" Type="person_alternative" />
+      <Association Name="task_alternative" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.task" Member="tasks">
+    <Type Name="task">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="task_alternative" Member="alternatives" ThisKey="id" OtherKey="task_id" Type="alternative" />
+      <Association Name="task_criteria" Member="criterias" ThisKey="id" OtherKey="task_id" Type="criteria" />
+      <Association Name="task_person_task" Member="person_tasks" ThisKey="id" OtherKey="task_id" Type="person_task" />
+      <Association Name="task_plandss" Member="plandsses" ThisKey="id" OtherKey="task_id" Type="plandss" />
+      <Association Name="task_resource" Member="resources" ThisKey="id" OtherKey="task_id" Type="resource" />
+      <Association Name="task_role" Member="roles" ThisKey="id" OtherKey="task_id" Type="role" />
+    </Type>
+  </Table>
+  <Table Name="dbo.crit_scale" Member="crit_scales">
+    <Type Name="crit_scale">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="crit_scale_crit_value" Member="crit_values" ThisKey="id" OtherKey="crit_scale_id" Type="crit_value" />
+      <Association Name="crit_scale_preference" Member="preferences" ThisKey="id" OtherKey="crit_scale_id" Type="preference" />
+      <Association Name="criteria_crit_scale" Member="criteria" ThisKey="criteria_id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.crit_value" Member="crit_values">
+    <Type Name="crit_value">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="person_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="alternative_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="crit_scale_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="alternative_crit_value" Member="alternative" ThisKey="alternative_id" OtherKey="id" Type="alternative" IsForeignKey="true" />
+      <Association Name="crit_scale_crit_value" Member="crit_scale" ThisKey="crit_scale_id" OtherKey="id" Type="crit_scale" IsForeignKey="true" />
+      <Association Name="criteria_crit_value" Member="criteria" ThisKey="criteria_id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+      <Association Name="person_crit_value" Member="person" ThisKey="person_id" OtherKey="id" Type="person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.criteria" Member="criterias">
+    <Type Name="criteria">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="parent_crit_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="ismin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idealvalue" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="method_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="is_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="criteria_crit_scale" Member="crit_scales" ThisKey="id" OtherKey="criteria_id" Type="crit_scale" />
+      <Association Name="criteria_crit_value" Member="crit_values" ThisKey="id" OtherKey="criteria_id" Type="crit_value" />
+      <Association Name="criteria_criteria" Member="criterias" ThisKey="id" OtherKey="parent_crit_id" Type="criteria" />
+      <Association Name="criteria_pair_crit_comp" Member="pair_crit_comps" ThisKey="id" OtherKey="criteria2_id" Type="pair_crit_comp" />
+      <Association Name="criteria_pair_crit_comp1" Member="pair_crit_comps1" ThisKey="id" OtherKey="criteria1_id" Type="pair_crit_comp" />
+      <Association Name="criteria_preference" Member="preferences" ThisKey="id" OtherKey="criteria_id" Type="preference" />
+      <Association Name="criteria_resource" Member="resources" ThisKey="id" OtherKey="criteria_id" Type="resource" />
+      <Association Name="criteria_crit_fuzzy" Member="crit_fuzzy" ThisKey="id" OtherKey="id" Type="crit_fuzzy" Cardinality="One" />
+      <Association Name="criteria_criteria" Member="criteria1" ThisKey="parent_crit_id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+      <Association Name="task_criteria" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
+      <Association Name="method_criteria" Member="method" ThisKey="method_id" OtherKey="id" Type="method" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.job" Member="jobs">
+    <Type Name="job">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="alternative_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="job_job_loop" Member="job_loops" ThisKey="id" OtherKey="child_job_id" Type="job_loop" />
+      <Association Name="job_job_loop1" Member="job_loops1" ThisKey="id" OtherKey="parent_job_id" Type="job_loop" />
+      <Association Name="job_job_resource" Member="job_resources" ThisKey="id" OtherKey="job_id" Type="job_resource" />
+      <Association Name="job_plan_job" Member="plan_jobs" ThisKey="id" OtherKey="job_id" Type="plan_job" />
+      <Association Name="alternative_job" Member="alternative" ThisKey="alternative_id" OtherKey="id" Type="alternative" IsForeignKey="true" />
+      <Association Name="measure_job" Member="measure" ThisKey="measure_id" OtherKey="id" Type="measure" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.job_loop" Member="job_loops">
+    <Type Name="job_loop">
+      <Column Name="parent_job_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="child_job_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="job_job_loop" Member="job" ThisKey="child_job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+      <Association Name="job_job_loop1" Member="job1" ThisKey="parent_job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.job_resource" Member="job_resources">
+    <Type Name="job_resource">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="resource_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Association Name="job_job_resource" Member="job" ThisKey="job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+      <Association Name="resource_job_resource" Member="resource" ThisKey="resource_id" OtherKey="id" Type="resource" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.measure" Member="measures">
+    <Type Name="measure">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="code" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="measure_job" Member="jobs" ThisKey="id" OtherKey="measure_id" Type="job" />
+      <Association Name="measure_plandss" Member="plandsses" ThisKey="id" OtherKey="measure_id" Type="plandss" />
+      <Association Name="measure_resource" Member="resources" ThisKey="id" OtherKey="measure_id" Type="resource" />
+    </Type>
+  </Table>
+  <Table Name="dbo.method" Member="methods">
+    <Type Name="method">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="method_criteria" Member="criterias" ThisKey="id" OtherKey="method_id" Type="criteria" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pair_crit_comp" Member="pair_crit_comps">
+    <Type Name="pair_crit_comp">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="criteria1_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria2_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Association Name="criteria_pair_crit_comp" Member="criteria" ThisKey="criteria2_id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+      <Association Name="criteria_pair_crit_comp1" Member="criteria1" ThisKey="criteria1_id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.permission" Member="permissions">
+    <Type Name="permission">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="pattern" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="permission_role_permission" Member="role_permissions" ThisKey="id" OtherKey="permission_id" Type="role_permission" />
+    </Type>
+  </Table>
+  <Table Name="dbo.person" Member="persons">
+    <Type Name="person">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="login" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="person_crit_value" Member="crit_values" ThisKey="id" OtherKey="person_id" Type="crit_value" />
+      <Association Name="person_person_alternative" Member="person_alternatives" ThisKey="id" OtherKey="person_id" Type="person_alternative" />
+      <Association Name="person_person_role" Member="person_roles" ThisKey="id" OtherKey="person_id" Type="person_role" />
+      <Association Name="person_person_task" Member="person_tasks" ThisKey="id" OtherKey="person_id" Type="person_task" />
+    </Type>
+  </Table>
+  <Table Name="dbo.person_alternative" Member="person_alternatives">
+    <Type Name="person_alternative">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="alternative_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="person_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="alternative_person_alternative" Member="alternative" ThisKey="alternative_id" OtherKey="id" Type="alternative" IsForeignKey="true" />
+      <Association Name="person_person_alternative" Member="person" ThisKey="person_id" OtherKey="id" Type="person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.person_role" Member="person_roles">
+    <Type Name="person_role">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="person_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="person_person_role" Member="person" ThisKey="person_id" OtherKey="id" Type="person" IsForeignKey="true" />
+      <Association Name="role_person_role" Member="role" ThisKey="role_id" OtherKey="id" Type="role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.person_task" Member="person_tasks">
+    <Type Name="person_task">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="person_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Association Name="person_person_task" Member="person" ThisKey="person_id" OtherKey="id" Type="person" IsForeignKey="true" />
+      <Association Name="task_person_task" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.plan_job" Member="plan_jobs">
+    <Type Name="plan_job">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="plan_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="begin_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="job_plan_job" Member="job" ThisKey="job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+      <Association Name="plandss_plan_job" Member="plandss" ThisKey="plan_id" OtherKey="id" Type="plandss" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.plan_loop" Member="plan_loops">
+    <Type Name="plan_loop">
+      <Column Name="parent_plan_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="child_plan_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="plandss_plan_loop" Member="plandss" ThisKey="child_plan_id" OtherKey="id" Type="plandss" IsForeignKey="true" />
+      <Association Name="plandss_plan_loop1" Member="plandss1" ThisKey="parent_plan_id" OtherKey="id" Type="plandss" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.plan_method" Member="plan_methods">
+    <Type Name="plan_method">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="plan_method_plandss" Member="plandsses" ThisKey="id" OtherKey="plan_method_id" Type="plandss" />
+    </Type>
+  </Table>
+  <Table Name="dbo.plandss" Member="plandsses">
+    <Type Name="plandss">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="plan_method_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="begin_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="isready" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="alfa" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="reserv_percent" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="func_value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="plandss_plan_job" Member="plan_jobs" ThisKey="id" OtherKey="plan_id" Type="plan_job" />
+      <Association Name="plandss_plan_loop" Member="plan_loops" ThisKey="id" OtherKey="child_plan_id" Type="plan_loop" />
+      <Association Name="plandss_plan_loop1" Member="plan_loops1" ThisKey="id" OtherKey="parent_plan_id" Type="plan_loop" />
+      <Association Name="plandss_resource_reserve" Member="resource_reserves" ThisKey="id" OtherKey="plan_id" Type="resource_reserve" />
+      <Association Name="measure_plandss" Member="measure" ThisKey="measure_id" OtherKey="id" Type="measure" IsForeignKey="true" />
+      <Association Name="plan_method_plandss" Member="plan_method" ThisKey="plan_method_id" OtherKey="id" Type="plan_method" IsForeignKey="true" />
+      <Association Name="task_plandss" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.preference" Member="preferences">
+    <Type Name="preference">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="crit_scale_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="parent_pref_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Association Name="preference_preference" Member="preferences" ThisKey="id" OtherKey="parent_pref_id" Type="preference" />
+      <Association Name="crit_scale_preference" Member="crit_scale" ThisKey="crit_scale_id" OtherKey="id" Type="crit_scale" IsForeignKey="true" />
+      <Association Name="criteria_preference" Member="criteria" ThisKey="criteria_id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+      <Association Name="preference_preference" Member="preference1" ThisKey="parent_pref_id" OtherKey="id" Type="preference" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.resource" Member="resources">
+    <Type Name="resource">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="value" Type="System.Decimal" DbType="Decimal(18,6) NOT NULL" CanBeNull="false" />
+      <Column Name="period" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="resource_job_resource" Member="job_resources" ThisKey="id" OtherKey="resource_id" Type="job_resource" />
+      <Association Name="resource_resource_reserve" Member="resource_reserves" ThisKey="id" OtherKey="resource_id" Type="resource_reserve" />
+      <Association Name="criteria_resource" Member="criteria" ThisKey="criteria_id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+      <Association Name="measure_resource" Member="measure" ThisKey="measure_id" OtherKey="id" Type="measure" IsForeignKey="true" />
+      <Association Name="task_resource" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.resource_reserve" Member="resource_reserves">
+    <Type Name="resource_reserve">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="resource_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="plan_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Association Name="plandss_resource_reserve" Member="plandss" ThisKey="plan_id" OtherKey="id" Type="plandss" IsForeignKey="true" />
+      <Association Name="resource_resource_reserve" Member="resource" ThisKey="resource_id" OtherKey="id" Type="resource" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.role" Member="roles">
+    <Type Name="role">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="role_person_role" Member="person_roles" ThisKey="id" OtherKey="role_id" Type="person_role" />
+      <Association Name="role_role_permission" Member="role_permissions" ThisKey="id" OtherKey="role_id" Type="role_permission" />
+      <Association Name="task_role" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.role_permission" Member="role_permissions">
+    <Type Name="role_permission">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="permission_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="permission_role_permission" Member="permission" ThisKey="permission_id" OtherKey="id" Type="permission" IsForeignKey="true" />
+      <Association Name="role_role_permission" Member="role" ThisKey="role_id" OtherKey="id" Type="role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.crit_fuzzy" Member="crit_fuzzies">
+    <Type Name="crit_fuzzy">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="critId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="criteria_crit_fuzzy" Member="criteria" ThisKey="id" OtherKey="id" Type="criteria" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.issdss_alternative_Delete" Method="issdss_alternative_Delete">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.prc_plandss" Method="prc_plandss" IsComposable="true">
+    <Parameter Name="plan_id" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.issdss_alternative_Insert" Method="issdss_alternative_Insert">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_alternative_person_Read" Method="issdss_alternative_person_Read">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_alternative_person_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isChecked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_alternative_person_Update" Method="issdss_alternative_person_Update">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Person_ids" Parameter="person_ids" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_alternative_Read" Method="issdss_alternative_Read">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_alternative_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_alternative_Read_All" Method="issdss_alternative_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_alternative_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="jobs" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_alternative_Update" Method="issdss_alternative_Update">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_crit_scale_Delete" Method="issdss_crit_scale_Delete">
+    <Parameter Name="CriteriaID" Parameter="criteriaID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ScaleID" Parameter="scaleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_scale_DeleteResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_scale_Insert" Method="issdss_crit_scale_Insert">
+    <Parameter Name="CriteriaID" Parameter="criteriaID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Rank" Parameter="rank" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Ord" Parameter="ord" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_scale_InsertResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_scale_Read" Method="issdss_crit_scale_Read">
+    <Parameter Name="CriteriaID" Parameter="criteriaID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_scale_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_scale_Read_All" Method="issdss_crit_scale_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_scale_Read_AllResult">
+      <Column Name="c_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="c_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="value_for_view" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="is_resourse" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="scale_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cs_ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="current_scale_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_scale_Read_by_ID" Method="issdss_crit_scale_Read_by_ID">
+    <Parameter Name="ScaleID" Parameter="scaleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_scale_Read_by_IDResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_scale_Update" Method="issdss_crit_scale_Update">
+    <Parameter Name="CriteriaID" Parameter="criteriaID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Rank" Parameter="rank" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Ord" Parameter="ord" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_scale_UpdateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_value_Read_All" Method="issdss_crit_value_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_value_Read_AllResult">
+      <Column Name="a_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="a_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="person_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="p_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="c_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="c_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="cv_value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="crit_scale_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_scale" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="value_for_view" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_value_Read_Ranks" Method="issdss_crit_value_Read_Ranks">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_crit_value_Read_RanksResult">
+      <Column Name="a_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="a_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="c_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="c_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="value_for_view" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_crit_value_Update" Method="issdss_crit_value_Update" IsComposable="true">
+    <Parameter Name="d" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="alternative_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="person_id" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.issdss_criteria_ChooseParent" Method="issdss_criteria_ChooseParent" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.issdss_criteria_Delete" Method="issdss_criteria_Delete" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.issdss_criteria_Insert" Method="issdss_criteria_Insert">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Parent_ID" Parameter="parent_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsMin" Parameter="isMin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdealValue" Parameter="idealValue" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Method_ID" Parameter="method_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsNumber" Parameter="isNumber" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Ord" Parameter="ord" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_InsertResult">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Insert_Main" Method="issdss_criteria_Insert_Main">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Rank" Parameter="rank" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="IsMin" Parameter="isMin" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_criteria_Read" Method="issdss_criteria_Read">
+    <Parameter Name="ParentID" Parameter="parentID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="parent_crit_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Read_All" Method="issdss_criteria_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="parent_crit_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Read_AllNames" Method="issdss_criteria_Read_AllNames">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_Read_AllNamesResult">
+      <Column Name="c_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="c_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="parent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rank" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Read_by_id" Method="issdss_criteria_Read_by_id">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_Read_by_idResult">
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="ismin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_crit_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idealvalue" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="method_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_parent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Read_by_Parent" Method="issdss_criteria_Read_by_Parent">
+    <Parameter Name="ParentID" Parameter="parentID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_Read_by_ParentResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="parent_crit_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_read_for_parent" Method="issdss_criteria_read_for_parent">
+    <Parameter Name="task_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="criteria_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_read_for_parentResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Read_Names" Method="issdss_criteria_Read_Names">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_Read_NamesResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="parent_crit_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Read_Names_by_Order" Method="issdss_criteria_Read_Names_by_Order">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_criteria_Read_Names_by_OrderResult">
+      <Column Name="lev" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ord" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="is_parent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_criteria_Update" Method="issdss_criteria_Update">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Parent_ID" Parameter="parent_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsMin" Parameter="isMin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdealValue" Parameter="idealValue" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Method_ID" Parameter="method_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsNumber" Parameter="isNumber" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Ord" Parameter="ord" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_criteria_Update_Method" Method="issdss_criteria_Update_Method">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="method_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_criteria_Update_Parent" Method="issdss_criteria_Update_Parent">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ParentID" Parameter="parentID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_criteria_Update_Rank" Method="issdss_criteria_Update_Rank">
+    <Parameter Name="CriteriaID" Parameter="criteriaID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Rank" Parameter="rank" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_job_Delete" Method="issdss_job_Delete">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_DeleteResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="m_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_jobs" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_for_Gantt" Method="issdss_job_for_Gantt">
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_for_GanttResult">
+      <Column Name="a_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="j_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="j_ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_Insert" Method="issdss_job_Insert">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Duration" Parameter="duration" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="MeasureID" Parameter="measureID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Ord" Parameter="ord" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_InsertResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="m_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_jobs" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_loop_Delete" Method="issdss_job_loop_Delete">
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ParentJobID" Parameter="parentJobID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_loop_DeleteResult">
+      <Column Name="child_job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_loop_Insert" Method="issdss_job_loop_Insert">
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ParentJobID" Parameter="parentJobID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_loop_InsertResult">
+      <Column Name="child_job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_loop_Read" Method="issdss_job_loop_Read">
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_loop_ReadResult">
+      <Column Name="child_job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_loop_Read_All" Method="issdss_job_loop_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_loop_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_Read" Method="issdss_job_Read">
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_Read_All" Method="issdss_job_Read_All">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="m_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_jobs" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_resource_Read" Method="issdss_job_resource_Read">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_resource_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="is_enabled" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_job_resource_Update" Method="issdss_job_resource_Update" IsComposable="true">
+    <Parameter Name="d" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.issdss_job_Update" Method="issdss_job_Update">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Duration" Parameter="duration" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="MeasureID" Parameter="measureID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Ord" Parameter="ord" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_job_UpdateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="m_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_jobs" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_measure_Read_All" Method="issdss_measure_Read_All">
+    <ElementType Name="issdss_measure_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="code" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_method_Read_All" Method="issdss_method_Read_All">
+    <ElementType Name="issdss_method_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_pair_crit_comp_Read" Method="issdss_pair_crit_comp_Read">
+    <Parameter Name="parent_crit_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_pair_crit_comp_ReadResult">
+      <Column Name="number" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="criteria1_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria1_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="criteria2_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="criteria2_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="rank" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_pair_crit_comp_Update" Method="issdss_pair_crit_comp_Update" IsComposable="true">
+    <Parameter Name="d" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="parent_crit_id" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.issdss_permission_Read" Method="issdss_permission_Read">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_permission_ReadResult">
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="task" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="permission_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_person_alternative_Read" Method="issdss_person_alternative_Read">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_person_alternative_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isChecked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_person_alternative_Update" Method="issdss_person_alternative_Update">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Alter_ids" Parameter="alter_ids" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_person_Delete" Method="issdss_person_Delete">
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_person_Insert" Method="issdss_person_Insert">
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Login" Parameter="login" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="issdss_person_InsertResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_person_Read" Method="issdss_person_Read">
+    <Parameter Name="Login" Parameter="login" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="issdss_person_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="login" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_person_Read_All" Method="issdss_person_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_person_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="login" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="tasks" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="roles" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_person_role_Read" Method="issdss_person_role_Read">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_person_role_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isChecked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_person_role_Update" Method="issdss_person_role_Update">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Role_ids" Parameter="role_ids" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_person_task_Read" Method="issdss_person_task_Read">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_person_task_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isChecked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_person_task_Update" Method="issdss_person_task_Update">
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Task_ids" Parameter="task_ids" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="issdss_person_task_UpdateResult">
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_personDDL_Read_All" Method="issdss_personDDL_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_personDDL_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plan_job_Read" Method="issdss_plan_job_Read">
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_plan_job_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="plan_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="job_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="begin_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plan_job_Update" Method="issdss_plan_job_Update">
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StartDate" Parameter="startDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EndDate" Parameter="endDate" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_plan_loop_Delete" Method="issdss_plan_loop_Delete">
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ParentPlanID" Parameter="parentPlanID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_plan_loop_DeleteResult">
+      <Column Name="child_plan_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plan_loop_Insert" Method="issdss_plan_loop_Insert">
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ParentPlanID" Parameter="parentPlanID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_plan_loop_InsertResult">
+      <Column Name="child_plan_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plan_loop_Read" Method="issdss_plan_loop_Read">
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_plan_loop_ReadResult">
+      <Column Name="child_plan_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plan_loop_Read_All" Method="issdss_plan_loop_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_plan_loop_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plan_method_Read_All" Method="issdss_plan_method_Read_All">
+    <ElementType Name="issdss_plan_method_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plandss_Delete" Method="issdss_plandss_Delete">
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_plandss_Insert" Method="issdss_plandss_Insert">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="MethodID" Parameter="methodID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BeginDate" Parameter="beginDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EndDate" Parameter="endDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="MeasureID" Parameter="measureID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsReady" Parameter="isReady" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Alfa" Parameter="alfa" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="ReservPercent" Parameter="reservPercent" Type="System.Decimal" DbType="Decimal(18,4)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_plandss_Read" Method="issdss_plandss_Read">
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_plandss_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="plan_method_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="begin_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="isready" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="alfa" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="func_value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="reserv_percent" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plandss_Read_All" Method="issdss_plandss_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_plandss_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="method_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="method" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="begin_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="measure" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="isready" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="alfa" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="func_value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="reserv_percent" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_plandss_Update" Method="issdss_plandss_Update">
+    <Parameter Name="PlanID" Parameter="planID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="MethodID" Parameter="methodID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BeginDate" Parameter="beginDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EndDate" Parameter="endDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="MeasureID" Parameter="measureID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsReady" Parameter="isReady" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Alfa" Parameter="alfa" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="ReservPercent" Parameter="reservPercent" Type="System.Decimal" DbType="Decimal(18,4)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_resource_Delete" Method="issdss_resource_Delete">
+    <Parameter Name="ResourceID" Parameter="resourceID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_resource_Insert" Method="issdss_resource_Insert">
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="Value" Parameter="value" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Period" Parameter="period" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MeasureID" Parameter="measureID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CriteriaID" Parameter="criteriaID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_resource_Read" Method="issdss_resource_Read">
+    <Parameter Name="ResourceID" Parameter="resourceID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_resource_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="value" Type="System.Decimal" DbType="Decimal(18,6) NOT NULL" CanBeNull="false" />
+      <Column Name="period" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_resource_Read_All" Method="issdss_resource_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_resource_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="value" Type="System.Decimal" DbType="Decimal(18,6) NOT NULL" CanBeNull="false" />
+      <Column Name="period" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="measure_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="m_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="criteria_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="c_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_resource_Update" Method="issdss_resource_Update">
+    <Parameter Name="ResourceID" Parameter="resourceID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="Value" Parameter="value" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Parameter Name="Period" Parameter="period" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MeasureID" Parameter="measureID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CriteriaID" Parameter="criteriaID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_role_Delete" Method="issdss_role_Delete">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_role_Insert" Method="issdss_role_Insert">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_role_permission_Read" Method="issdss_role_permission_Read">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_role_permission_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isChecked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_role_permission_Update" Method="issdss_role_permission_Update">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Permission_ids" Parameter="permission_ids" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_role_person_Read" Method="issdss_role_person_Read">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_role_person_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isChecked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_role_person_Update" Method="issdss_role_person_Update">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Person_ids" Parameter="person_ids" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_role_Read" Method="issdss_role_Read">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_role_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_role_Read_All" Method="issdss_role_Read_All">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_role_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_role_Update" Method="issdss_role_Update">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_task_Delete" Method="issdss_task_Delete">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_task_Insert" Method="issdss_task_Insert">
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.issdss_task_person_Read" Method="issdss_task_person_Read">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CurrentTaskID" Parameter="currentTaskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_task_person_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isChecked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="part" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_task_person_Update" Method="issdss_task_person_Update">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Person_ids" Parameter="person_ids" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="issdss_task_person_UpdateResult">
+      <Column Name="task_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_task_Read" Method="issdss_task_Read">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_task_ReadResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_task_Read_All" Method="issdss_task_Read_All">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="issdss_task_Read_AllResult">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.issdss_task_Update" Method="issdss_task_Update">
+    <Parameter Name="TaskID" Parameter="taskID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.prc_calculate_task" Method="prc_calculate_task" IsComposable="true">
+    <Parameter Name="task_id" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.prc_criteria_copy" Method="prc_criteria_copy" IsComposable="true">
+    <Parameter Name="src_task" Type="System.Int32" DbType="Int" />
+    <Parameter Name="target_task" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.prc_dssplan" Method="prc_dssplan" IsComposable="true">
+    <Parameter Name="plandss" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+</Database>
