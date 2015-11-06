@@ -1,6 +1,6 @@
 ﻿USE [issdss]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetFuzzyValueEstimation]    Script Date: 27.10.2015 9:47:02 ******/
+/****** Object:  UserDefinedFunction [dbo].[GetFuzzyValueEstimation]    Script Date: 06.11.2015 15:10:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,7 +23,7 @@ BEGIN
 		SELECT X = CAST([name] AS float),
 			   Y = [rank]
 		FROM [issdss].[dbo].[crit_scale]
-		WHERE criteria_id = 128
+		WHERE criteria_id = @critId
 	),
 	CTE2 as (
 		SELECT CTE.*, LeftDiff = IIF(X <= @value, @value - X, NULL), RightDiff = IIF(X >= @value, X - @value, NULL)
@@ -49,7 +49,7 @@ BEGIN
 END
 
 GO
-/****** Object:  UserDefinedFunction [dbo].[InterpolateLine]    Script Date: 27.10.2015 9:47:02 ******/
+/****** Object:  UserDefinedFunction [dbo].[InterpolateLine]    Script Date: 06.11.2015 15:10:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -79,7 +79,7 @@ BEGIN
 END
 
 GO
-/****** Object:  StoredProcedure [dbo].[prc_calculate_task]    Script Date: 27.10.2015 9:47:02 ******/
+/****** Object:  StoredProcedure [dbo].[prc_calculate_task]    Script Date: 06.11.2015 15:10:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +239,7 @@ BEGIN
                         EXISTS(SELECT 1 FROM criteria c    -- Только если обощенный!
                                WHERE c.parent_crit_id = #t.id)
 
-				-- нечеткий минимум
+				-- минимум
 
 				UPDATE
                         crit_value
@@ -260,9 +260,8 @@ BEGIN
                         #t
                 WHERE
                         #t.id  = crit_value.criteria_id AND
-						#t.method_id = 7 AND
+						#t.method_id = 8 AND
                         #t.lev = @lev
-						AND (SELECT TOP 1 is_number FROM criteria WHERE crit_value.criteria_id = criteria.id) = 0
 
 				-------
 
@@ -274,7 +273,7 @@ BEGIN
                 SET
                         value = (
                                 SELECT TOP 1
-                                        [dbo].[GetFuzzyValueEstimation](c.id, cv.value)
+                                        [dbo].[GetFuzzyValueEstimation](c.parent_crit_id, cv.value)
                                 FROM
                                         criteria c
                                         join crit_value cv on c.id = cv.criteria_id
@@ -290,7 +289,6 @@ BEGIN
                         #t.id  = crit_value.criteria_id AND
 						#t.method_id = 7 AND
                         #t.lev = @lev
-						AND (SELECT TOP 1 is_number FROM criteria WHERE crit_value.criteria_id = criteria.id) = 1
 
 				-------
 
