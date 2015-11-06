@@ -3,6 +3,9 @@ INSERT [dbo].[task] ([id], [name]) VALUES (6, N'TaskFuzzy')
 GO
 INSERT [dbo].[method] ([id], [name], [url]) VALUES (7, N'Нечеткий', N'Fuzzy')
 GO
+INSERT [dbo].[method] ([id], [name], [url]) VALUES (8, N'Минимум', NULL)
+GO
+
 
 INSERT [dbo].[criteria] ([id], [task_id], [name], [parent_crit_id], [rank], [ismin], [idealvalue], [method_id], [ord], [description], [is_number]) VALUES (125, 6, N'CritMin', NULL, CAST(0.000001 AS Decimal(18, 6)), 1, NULL, 7, 0, N'', 0)
 GO
