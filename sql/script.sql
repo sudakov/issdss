@@ -12,6 +12,10 @@ UNION
 SELECT 6, 'Мультипликативная свёртка'
 go
 
+INSERT method (id, name, url) VALUES (7, 'Нечеткий', 'Fuzzy')
+go
+INSERT method (id, name, url) VALUES (8, 'MIN', 'FuzzyMin')
+go 
 
 INSERT INTO [issdss].[dbo].[permission] (id, name, pattern)
 SELECT  1,    'Просмотр задач',    NULL

@@ -2310,6 +2310,68 @@ BEGIN
 END
 GO
  
+
+alter FUNCTION [dbo].[GetFuzzyValueEstimation]
+(
+	@critId int, 
+	@value float
+)
+RETURNS float
+AS
+BEGIN
+	DECLARE @result float;
+	WITH CTE AS (
+		SELECT X = CAST([name] AS float),
+			   Y = [rank]
+		FROM [issdss].[dbo].[crit_scale]
+		WHERE criteria_id = @critId
+	),
+	CTE2 as (
+		SELECT CTE.*, LeftDiff = case when X <= @value then @value - X else NULL end, 
+		              RightDiff = case when X >= @value then  X - @value else NULL end
+		FROM CTE
+	),
+	CTE3 as (
+		SELECT X, Y, row_number () over (order by (select X)) RN
+		FROM CTE2
+		WHERE LeftDiff = (SELECT MIN(LeftDiff) FROM CTE2)
+			  OR RightDiff = (SELECT MIN(RightDiff) FROM CTE2)
+	),
+	CTE4 AS (
+		SELECT 
+		  MAX(case when RN = 1 then X end) as X1,
+		  MAX(case when RN = 2 then X end) as X2,
+		  MAX(case when RN = 1 then Y end) as Y1,
+		  MAX(case when RN = 2 then Y end) as Y2
+		FROM CTE3
+	)
+	SELECT @result = MAX([dbo].[InterpolateLine](CTE4.X1, CTE4.Y1, CTE4.X2, CTE4.Y2, @value))
+	FROM CTE4	
+	RETURN @result
+END
+
+GO
+
+alter FUNCTION [dbo].[InterpolateLine]
+(
+	@x1 float,
+	@y1 float,
+	@x2 float,
+	@y2 float,
+	@x float
+)
+RETURNS float
+AS
+BEGIN
+	IF (@y1 is null)
+		RETURN @y2;
+	IF (@y2 is null)
+		RETURN @y1;
+	RETURN @y1 + ((@y2 - @y1)/(@x2 - @x1))*(@x - @x1)
+END
+
+GO
+
  
  
 ---------------------------------------------  ГЛАВНАЯ ПРОЦЕДУРА РАНЖИРОВАНИЯ  ------------------------------------------
@@ -2466,6 +2528,59 @@ BEGIN
                         #t.lev = @lev AND
                         EXISTS(SELECT 1 FROM criteria c    -- Только если обощенный!
                                WHERE c.parent_crit_id = #t.id)
+
+				-- минимум
+
+				UPDATE
+                        crit_value
+                SET
+                        value = (
+                                SELECT
+                                        MIN(cv.value)
+                                FROM
+                                        criteria c
+                                        join crit_value cv on c.id = cv.criteria_id
+                                        join #t tt on tt.id = c.id
+                                WHERE
+                                        c.parent_crit_id = #t.id AND
+                                        cv.alternative_id = crit_value.alternative_id AND
+                                        cv.person_id IS NULL
+                        )
+                FROM
+                        #t
+                WHERE
+                        #t.id  = crit_value.criteria_id AND
+						#t.method_id = 8 AND
+                        #t.lev = @lev
+
+				-------
+
+				
+				-- нечеткий метод с функцией принадлежности
+
+				UPDATE
+                        crit_value
+                SET
+                        value = (
+                                SELECT TOP 1
+                                        [dbo].[GetFuzzyValueEstimation](c.parent_crit_id, cv.value)
+                                FROM
+                                        criteria c
+                                        join crit_value cv on c.id = cv.criteria_id
+                                        join #t tt on tt.id = c.id
+                                WHERE
+                                        c.parent_crit_id = #t.id AND
+                                        cv.alternative_id = crit_value.alternative_id AND
+                                        cv.person_id IS NULL
+                        )
+                FROM
+                        #t
+                WHERE
+                        #t.id  = crit_value.criteria_id AND
+						#t.method_id = 7 AND
+                        #t.lev = @lev
+
+				-------
 
                 UPDATE
                         crit_value
