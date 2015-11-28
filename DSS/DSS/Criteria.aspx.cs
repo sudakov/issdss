@@ -4,10 +4,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections.Specialized;
 using DSS.DSS.Classes;
 
 namespace DSS.DSS
@@ -37,6 +35,7 @@ namespace DSS.DSS
             _BTN_Add.Enabled = false;
             _BTN_Update.Enabled = false;
             _PNL_CriteriaDelete.Visible = false;
+            ScaleEditTd.Visible = false;
             using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
             {
                 SqlCommand Command = new SqlCommand("dbo.issdss_permission_Read", Connection);
@@ -71,6 +70,7 @@ namespace DSS.DSS
                             _TB_Ord.Enabled = true;
                             _BTN_Add.Enabled = true;
                             _BTN_Update.Enabled = true;
+                            ScaleEditTd.Visible = IsScaleVisible();
                             break;
                         case 24: _PNL_CriteriaDelete.Visible = true; break;
                     }
@@ -84,7 +84,7 @@ namespace DSS.DSS
                 string ID = Convert.ToString(Request.QueryString["id"]);
                 DrawTree(ID);
 
-                if (ID != null && ID != "")
+                if (!string.IsNullOrEmpty(ID))
                 {
                     TreeView1.SelectedNode.Value = ID;
                     TreeView1_SelectedNodeChanged(sender, e);
@@ -243,7 +243,7 @@ namespace DSS.DSS
             _IMGBTN_Delete.Visible = false;
             _TB_Name.Text = "";
             _TB_Description.Text = "";
-            
+
             // Заполнение ДропДаунЛиста родителей
             using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
             {
@@ -270,7 +270,7 @@ namespace DSS.DSS
             _TB_Ord.Enabled = true;
             _BTN_Add.Enabled = true;
             _BTN_Update.Enabled = true;
-            
+
             // Сделать невидимой кнопку добавления градаций, т.к. низя их добавлять пока критерий не создан
             _IMGBTN_ScaleAdd.Visible = false;
 
@@ -520,6 +520,25 @@ namespace DSS.DSS
         {
             _HL_EditMethod.NavigateUrl = "~/DSS/" + _DDL_AggregationMethodUrl.Items.FindByValue(_DDL_AggregationMethod.SelectedValue).Text + ".aspx?id=" + TreeView1.SelectedNode.Value;
             _PNL_Editor.Visible = true;
+
+            ScaleEditTd.Visible = IsScaleVisible();
+        }
+
+        private bool IsScaleVisible()
+        {
+            if (TreeView1.SelectedNode == null)
+                return false;
+            var critId = int.Parse(TreeView1.SelectedNode.Value);
+            using (var context = new DssDataContext())
+            {
+                bool hasChild = context.criterias.Any(x => x.parent_crit_id == critId);
+                var selectedItem = context.criterias.Single(x => x.id == critId);
+                bool isFuzzy = selectedItem.method_id == 7;
+                bool isScaleVisible = isFuzzy && !hasChild;
+                if (isScaleVisible)
+                    ScaleEditHL.NavigateUrl = string.Format("Fuzzy.aspx?id={0}&isScale=1", critId);
+                return isScaleVisible;
+            }
         }
     }
 }
