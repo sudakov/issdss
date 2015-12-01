@@ -36,14 +36,14 @@
                     pointFormat: "Принадлежность: {point.y:.3f}"
                 },
 
-                yAxis: { min: 0, max: 1 },
+                yAxis: { min: 0, max: <%# MaxValue %> },
 
                 series: [
                     {
                         data: [<%# Data %>],
                         draggableY: true,
                         dragMinY: 0,
-                        dragMaxY: 1,
+                        dragMaxY: <%# MaxValue %>,
                         name: '<%# CriteriaName %>'
                     }
                 ]

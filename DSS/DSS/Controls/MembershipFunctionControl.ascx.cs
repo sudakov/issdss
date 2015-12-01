@@ -14,6 +14,7 @@ namespace DSS.DSS.Controls
         protected string Categories { get; set; }
         protected string CriteriaName { get; set; }
         protected string Data { get; set; }
+        protected int MaxValue { get; set; }
 
         public MembershipFunctionControl()
         {
@@ -59,6 +60,7 @@ namespace DSS.DSS.Controls
                 var depended = GetDependedScale(context);
                 Categories = string.Join(",", depended.Select(x => "'" + x.name + "'"));
                 Data = string.Join(",", depended.Select(x => x.rank.Value.ToString(CultureInfo.InvariantCulture)));
+                MaxValue = (int) Math.Ceiling(depended.Max(x => x.rank.Value));
             }
             hfKeys.Value = "[" + Categories + "]";
         }
@@ -80,6 +82,7 @@ namespace DSS.DSS.Controls
                 Data = string.Join(",", depended.Select(x => x.rank.Value.ToString(CultureInfo.InvariantCulture)));
             }
             hfKeys.Value = "[" + Categories + "]";
+            MaxValue = 1;
         }
 
         private List<crit_scale> GetDependedScale(DssDataContext context)
