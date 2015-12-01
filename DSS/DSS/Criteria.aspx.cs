@@ -532,9 +532,7 @@ namespace DSS.DSS
             using (var context = new DssDataContext())
             {
                 bool hasChild = context.criterias.Any(x => x.parent_crit_id == critId);
-                var selectedItem = context.criterias.Single(x => x.id == critId);
-                bool isFuzzy = selectedItem.method_id == 7;
-                bool isScaleVisible = isFuzzy && !hasChild;
+                bool isScaleVisible = !hasChild;
                 if (isScaleVisible)
                     ScaleEditHL.NavigateUrl = string.Format("Fuzzy.aspx?id={0}&isScale=1", critId);
                 return isScaleVisible;
