@@ -14,6 +14,7 @@ namespace DSS.DSS.Controls
         protected string Categories { get; set; }
         protected string CriteriaName { get; set; }
         protected string Data { get; set; }
+        protected int MaxValue { get; set; }
 
         public MembershipFunctionControl()
         {
@@ -22,7 +23,7 @@ namespace DSS.DSS.Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected override void OnPreRender(EventArgs e)
@@ -39,6 +40,33 @@ namespace DSS.DSS.Controls
                 Visible = false;
                 return;
             }
+            bool isScale = Request.QueryString.Keys.Cast<string>().Any(x => x == "isScale");
+            ViewState.Add("isNumber", isScale);
+            if (!isScale)
+                FuzzyInit();
+            else
+            {
+                ScaleInit();
+            }
+        }
+
+        private void ScaleInit()
+        {
+            using (var context = new DssDataContext())
+            {
+                var criteria = context.criterias.First(x => x.id == CriteriaId);
+                FunctionName = criteria.name;
+
+                var depended = GetDependedScale(context);
+                Categories = string.Join(",", depended.Select(x => "'" + x.name + "'"));
+                Data = string.Join(",", depended.Select(x => x.rank.Value.ToString(CultureInfo.InvariantCulture)));
+                MaxValue = (int) Math.Ceiling(depended.Max(x => x.rank.Value));
+            }
+            hfKeys.Value = "[" + Categories + "]";
+        }
+
+        private void FuzzyInit()
+        {
             using (var context = new DssDataContext())
             {
                 var criteria = context.criterias.First(x => x.id == CriteriaId);
@@ -48,12 +76,13 @@ namespace DSS.DSS.Controls
 
                 bool isNumber = criteria.is_number != 0;
                 ViewState.Add("isNumber", isNumber);
-                
+
                 var depended = GetDependedScale(context);
                 Categories = string.Join(",", depended.Select(x => "'" + x.name + "'"));
                 Data = string.Join(",", depended.Select(x => x.rank.Value.ToString(CultureInfo.InvariantCulture)));
             }
             hfKeys.Value = "[" + Categories + "]";
+            MaxValue = 1;
         }
 
         private List<crit_scale> GetDependedScale(DssDataContext context)

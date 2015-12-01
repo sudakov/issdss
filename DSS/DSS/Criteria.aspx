@@ -101,6 +101,9 @@
                                 <td style="width:20px;">
                                     <asp:ImageButton runat="server" ID="_IMGBTN_ScaleAdd" ImageUrl="Images/add.png" AlternateText="Добавить градацию шкалы" CssClass="imgInGrid" Visible="false" ToolTip="Добавить градацию шкалы" />
                                 </td>
+                                <td style="width:20px;" runat="server" ID="ScaleEditTd">
+                                     <asp:HyperLink runat="server" ID="ScaleEditHL" ImageUrl="Images/edit.png" CssClass="imgInGrid" ToolTip="Редактировать шкалу" />
+                                </td>
                             </tr>
                         </table>
                     </td>
