@@ -123,7 +123,7 @@
                 <asp:Panel runat="server" ID="_PNL_Models" Visible="false">
                 <tr>
                     <td colspan="3" class="controls" style="width:100%; text-align:center; padding:9px;">
-                        <asp:DropDownList runat="server" ID="_DDL_Models" Width="50%" OnSelectedIndexChanged="_DDL_Models_SelectedIndexChanged"/>
+                        <asp:DropDownList runat="server" ID="_DDL_Models" Width="50%"/>
                         <p onclick="return confirm('Произвести прогон модели? Процедура может занять некоторое время.');" style="width:1px; margin: auto 0px">
                             <asp:ImageButton ID="_IMGBTN_RunModel" runat="server" ImageUrl="Images/play.png" AlternateText="Запустить прогон модели" Visible="false" ToolTip="Запустить прогон модели" OnClick="_IMGBTN_RunModel_Click"/>
                         </p>
