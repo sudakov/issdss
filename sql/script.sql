@@ -101,5 +101,111 @@ union
 select 2, 'Жадный алгоритм'
 union
 select 3, 'НПВР'
-
 GO
+
+-------------------------------------------------- модели и параметры
+
+--создаем пару тестовых задач
+DECLARE @id int
+SET @id = isnull((SELECT max(id) FROM issdss.dbo.task),0) + 1
+INSERT INTO issdss.dbo.task (id, name)
+SELECT @id, 'Тест с СМО'
+UNION
+SELECT @id + 1, 'Тест с вычислительной сетью'
+GO
+
+--записываем пару тестовых моделей
+INSERT INTO issdss.dbo.model (id, name, description, code)
+SELECT 1, 'Простая СМО', 'Простая СМО с двумя входными потоками', 1
+UNION
+SELECT 2, 'Вычислительная сеть', 'Модель вычислительной сети', 2
+GO
+
+--записываем альтернативу для простой СМО
+DECLARE @t_id int
+SET @t_id = isnull((SELECT max(id) FROM issdss.dbo.task),0) - 1
+DECLARE @a_id int
+SET @a_id = isnull((SELECT max(id) FROM issdss.dbo.alternative),0) + 1
+INSERT INTO issdss.dbo.alternative (id, task_id, name, model_id, trace_text, model_name)
+VALUES (@a_id, @t_id, 'первый прогон', 1, 'trace', 'Простая СМО')
+GO
+
+--параметры СМО
+DECLARE @t_id int
+SET @t_id = isnull((SELECT max(id) FROM issdss.dbo.task),0) - 1
+DECLARE @c_id int
+SET @c_id = isnull((SELECT max(id) FROM issdss.dbo.criteria),0) + 1
+INSERT INTO issdss.dbo.criteria (id, task_id, name, is_number)
+SELECT @c_id, @t_id, 'длина очереди 1', 1
+UNION
+SELECT @c_id + 1, @t_id, 'длина очереди 2', 1
+UNION
+SELECT @c_id + 2, @t_id, 'длина очереди 3', 1
+UNION
+SELECT @c_id + 3, @t_id, 'интенсивность входа 1', 1
+UNION
+SELECT @c_id + 4, @t_id, 'интенсивность входа 2', 1
+UNION
+SELECT @c_id + 5, @t_id, 'МО интенсивности обслуживания 1', 1
+UNION
+SELECT @c_id + 6, @t_id, 'МО интенсивности обслуживания 2', 1
+UNION
+SELECT @c_id + 7, @t_id, 'вероятность необходимости дообслуживания', 1
+UNION
+SELECT @c_id + 8, @t_id, 'время прогона', 1
+UNION
+SELECT @c_id + 9, @t_id, 'средняя длина очереди 1', 1
+UNION
+SELECT @c_id + 10, @t_id, 'средняя длина очереди 2', 1
+UNION
+SELECT @c_id + 11, @t_id, 'средняя длина очереди 3', 1
+UNION
+SELECT @c_id + 12, @t_id, 'частота потери заявок в очереди 1', 1
+UNION
+SELECT @c_id + 13, @t_id, 'частота потери заявок в очереди 2', 1
+UNION
+SELECT @c_id + 14, @t_id, 'частота потери заявок в очереди 3', 1
+UNION
+SELECT @c_id + 15, @t_id, 'Оценка вероятности занятости КО 1', 1
+UNION
+SELECT @c_id + 16, @t_id, 'Оценка вероятности занятости КО 2', 1
+--численные значения
+DECLARE @v_id int
+SET @v_id = isnull((SELECT max(id) FROM issdss.dbo.crit_value),0) + 1
+DECLARE @a_id int
+SET @a_id = isnull((SELECT max(id) FROM issdss.dbo.alternative),0)
+INSERT INTO issdss.dbo.crit_value (id, criteria_id, alternative_id, value)
+SELECT @v_id, @c_id, @a_id, 3.0
+UNION
+SELECT @v_id + 1, @c_id + 1, @a_id, 4.0
+UNION
+SELECT @v_id + 2, @c_id + 2, @a_id, 5.0
+UNION
+SELECT @v_id + 3, @c_id + 3, @a_id, 0.003
+UNION
+SELECT @v_id + 4, @c_id + 4, @a_id, 0.002
+UNION
+SELECT @v_id + 5, @c_id + 5, @a_id, 0.004
+UNION
+SELECT @v_id + 6, @c_id + 6, @a_id, 0.006
+UNION
+SELECT @v_id + 7, @c_id + 7, @a_id, 0.25
+UNION
+SELECT @v_id + 8, @c_id + 8, @a_id, 144400.0
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

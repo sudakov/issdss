@@ -47,7 +47,6 @@ CREATE TABLE criteria (
        ord                  int NULL,
        description          varchar(2000) NULL,
        is_number            int NULL,
-	   code_model			int NULL,
        PRIMARY KEY (id)
 )
 go
@@ -255,7 +254,7 @@ CREATE TABLE model(
 		id				int NOT NULL,
 		name			varchar(255) NOT NULL,
 		description		varchar(2000) NULL,
-		code			int NOT NULL,
+		code			varchar(30) NOT NULL,
 		PRIMARY KEY (id, name)
 		
 )

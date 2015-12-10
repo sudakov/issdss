@@ -42,16 +42,11 @@ namespace DSS.DSS
             _GV_ParentGridView.Columns[_GV_ParentGridView.Columns.Count - 1].Visible = false;
             _BTN_JobAdd.Enabled = false;
             _BTN_JobUpdate.Enabled = false;
+            _PNL_Models.Visible = true;
+            _LBL_Model.Visible = true;
 
             using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
             {
-#warning эта проверка сделана косо
-                if (int.Parse(Context.Request.Cookies["TaskID"].Value.ToString()) > 3)
-                {
-                    _PNL_Models.Visible = true;
-                    _LBL_Model.Visible = true;
-                }
-
                 SqlCommand Command = new SqlCommand("dbo.issdss_permission_Read", Connection);
                 Command.CommandType = CommandType.StoredProcedure;
                 if (Context.Request.Cookies["TaskID"] != null)
