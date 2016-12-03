@@ -125,6 +125,9 @@ CREATE TABLE alternative (
        task_id              int NOT NULL,
        name                 varchar(255) NULL,
        rank                 decimal(18,6) NULL,
+       model_id				int NULL,
+	   trace_text			varchar(MAX) NULL,
+	   model_name			varchar(255) NULL,
        PRIMARY KEY (id)
 )
 go
@@ -244,6 +247,45 @@ CREATE TABLE plan_loop (
        child_plan_id        int NOT NULL,
        PRIMARY KEY (parent_plan_id, child_plan_id)
 )
+go
+
+
+CREATE TABLE model(
+		id				int NOT NULL,
+		name			varchar(255) NOT NULL,
+		description		varchar(2000) NULL,
+		code			varchar(30) NOT NULL,
+		PRIMARY KEY (id, name)
+		
+)
+go
+
+
+CREATE TABLE model_crit(
+		id_model 	int NOT NULL,
+		id_crit		int NOT NULL,
+		is_param	bit NOT NULL,
+		code 		varchar(255) NOT NULL,
+		PRIMARY KEY (id_crit)
+)
+go
+
+
+ALTER TABLE model_crit
+	   ADD FOREIGN KEY (id_model)
+							 REFERENCES model
+go
+
+
+ALTER TABLE model_crit
+	   ADD FOREIGN KEY (id_crit)
+							 REFERENCES criteria
+go
+
+
+ALTER TABLE alternative
+	   ADD FOREIGN KEY (model_id)
+							 REFERENCES model
 go
 
 

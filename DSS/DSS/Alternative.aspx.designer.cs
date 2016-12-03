@@ -103,6 +103,42 @@ namespace DSS.DSS {
         protected global::System.Web.UI.WebControls.Label _LBL_JobIsEmpty;
         
         /// <summary>
+        /// _LBL_Model элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _LBL_Model;
+        
+        /// <summary>
+        /// _PNL_Models элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel _PNL_Models;
+        
+        /// <summary>
+        /// _DDL_Models элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList _DDL_Models;
+        
+        /// <summary>
+        /// _IMGBTN_RunModel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton _IMGBTN_RunModel;
+        
+        /// <summary>
         /// _PNL_JobIsNotEmpty элемент управления.
         /// </summary>
         /// <remarks>

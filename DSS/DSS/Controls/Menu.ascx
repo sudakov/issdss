@@ -217,6 +217,46 @@
         <td class="menuSep">
         </td>
     </tr>
+
+    <tr>
+        <td class="menuItem">
+            <div class="menuLabel" onclick="window.location.href = 'Model.aspx';">
+                <table class="userMenuItem" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="spacing"></td>
+                        <td class="point"></td>
+                        <td class="content">Модели</td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="menuSep">
+        </td>
+    </tr>
+
+    
+    <tr>
+        <td class="menuItem">
+            <div class="menuLabel" onclick="window.location.href = 'Modeling.aspx';">
+                <table class="userMenuItem" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="spacing"></td>
+                        <td class="point"></td>
+                        <td class="content">Моделирование</td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="menuSep">
+        </td>
+    </tr>
+
     </asp:Panel>
     <tr>
         <td>

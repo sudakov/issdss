@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DSS.DSS.Classes;
+using CommonModel;
 
 namespace DSS.DSS
 {
@@ -41,6 +42,8 @@ namespace DSS.DSS
             _GV_ParentGridView.Columns[_GV_ParentGridView.Columns.Count - 1].Visible = false;
             _BTN_JobAdd.Enabled = false;
             _BTN_JobUpdate.Enabled = false;
+            _PNL_Models.Visible = true;
+            _LBL_Model.Visible = true;
 
             using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
             {
@@ -83,6 +86,16 @@ namespace DSS.DSS
                 }
                 if (pagePermission == 0)
                     Response.Redirect("Default.aspx");
+                Reader.Close();
+                SqlCommand command = new SqlCommand("dbo.issdss_model_Read_All", Connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader();
+                _DDL_Models.Items.Clear();
+
+
+                while (reader.Read())
+                    _DDL_Models.Items.Add(new ListItem(reader["name"].ToString()));
+                reader.Close();
             }
 
             if (!IsPostBack)
@@ -141,6 +154,7 @@ namespace DSS.DSS
             
             if (e.CommandName == "EditItem")
             {
+                _IMGBTN_RunModel.Visible = true;
                 using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
                 {
                     // Заполнение грида с работами
@@ -172,6 +186,17 @@ namespace DSS.DSS
                     {
                         _TB_ID.Text = Reader["id"].ToString();
                         _TB_Name.Text = Reader["name"].ToString();
+                    }
+                    Reader.Close();
+
+                    //заполнить DDL по текущей альтернативе
+                    Command = new SqlCommand("dbo.issdss_alternative_model_Read", Connection);
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.Parameters.AddWithValue("ThisAlternativeId", ID);
+                    Reader = Command.ExecuteReader();
+                    if (Reader.Read())
+                    {
+                        _DDL_Models.SelectedValue = Reader["name"].ToString();
                     }
                     Reader.Close();
 
@@ -213,6 +238,7 @@ namespace DSS.DSS
         // Открыть форму для добавления альтернативы
         void _IMGBTN_Add_Click(object sender, ImageClickEventArgs e)
         {
+            _IMGBTN_RunModel.Visible = false;
             _PNL_Editor.Visible = true;
             _BTN_Add.Visible = true;
             _BTN_Update.Visible = false;
@@ -364,6 +390,20 @@ namespace DSS.DSS
         // Добавить альтернативу
         void _BTN_Add_Click(object sender, EventArgs e)
         {
+            _IMGBTN_RunModel.Visible = false;
+            string modelId = "";
+            using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
+            {
+                SqlCommand Command = new SqlCommand("dbo.issdss_model_Read", Connection);
+                Command.CommandType = CommandType.StoredProcedure;
+                Command.Parameters.AddWithValue("ModelName", _DDL_Models.SelectedValue.ToString());
+                Connection.Open();
+                SqlDataReader reader = Command.ExecuteReader();
+                if (reader.Read())
+                    modelId = reader["id"].ToString();
+                reader.Close();
+            }
+
             using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
             {
                 SqlCommand Command = new SqlCommand("dbo.issdss_alternative_Insert", Connection);
@@ -371,6 +411,8 @@ namespace DSS.DSS
                 Command.Parameters.AddWithValue("@TaskID", Context.Request.Cookies["TaskID"].Value);
                 Command.Parameters.AddWithValue("Name", _TB_Name.Text);
                 Command.Parameters.AddWithValue("UserID", Context.Request.Cookies["UserID"].Value);
+                Command.Parameters.AddWithValue("ModelID", int.Parse(modelId));
+                Command.Parameters.AddWithValue("ModelName", _DDL_Models.SelectedValue.ToString());
                 Connection.Open();
                 Command.ExecuteNonQuery();
             }
@@ -392,6 +434,8 @@ namespace DSS.DSS
                 Command.CommandType = CommandType.StoredProcedure;
                 Command.Parameters.AddWithValue("AlternativeID", _TB_ID.Text);
                 Command.Parameters.AddWithValue("Name", _TB_Name.Text);
+#warning странно считывается селектедвэлью
+                Command.Parameters.AddWithValue("ModelName", _DDL_Models.SelectedValue.ToString());
                 Connection.Open();
                 Command.ExecuteNonQuery();
             }
@@ -630,6 +674,175 @@ namespace DSS.DSS
             _PNL_JobEditor.Visible = true;
             _PNL_ParentEditor.Visible = false;
             _UP_JobEditor.Update();
+        }
+
+
+        #region Скорее всего убрать из глобальных переменных
+        private static List<string> paramsList;
+
+        public static List<string> ParamsList
+        {
+            get { return paramsList; }
+        }
+
+        private static List<string> codeList;
+
+        public static List<string> CodeList
+        {
+            get { return Alternative.codeList; }
+        }
+        #endregion
+
+        private static Dictionary<string, double> paramsTable;
+
+        public static Dictionary<string, double> ParamsTable
+        {
+            get { return Alternative.paramsTable; }
+        }
+
+        private static Dictionary<string, double> kormTable;
+
+        public static Dictionary<string, double> KormTable
+        {
+            get { return Alternative.kormTable; }
+        }
+
+        private static bool runStart;
+
+        public static bool RunStart
+        {
+            get { return runStart; }
+        }
+
+        private static int alternativeId;
+
+        public static int AlternativeId
+        {
+            get { return Alternative.alternativeId; }
+        }
+
+        private enum modelsList
+        {
+            МоделиНЕТ = 0,
+            ПростаяСМО = 1,
+            Лифт = 2,
+            ВычислительнаяСеть = 3
+        }
+
+
+
+        /// <summary>
+        /// Собирает значения параметров модели из БД
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _IMGBTN_RunModel_Click(object sender, ImageClickEventArgs e)
+        {
+            runStart = false;
+            paramsList = new List<string>();
+            codeList = new List<string>();
+
+            paramsTable = new Dictionary<string, double>();
+            kormTable = new Dictionary<string, double>();
+
+            alternativeId = int.Parse(_TB_ID.Text);
+            using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
+            {
+                SqlCommand Command = new SqlCommand("dbo.issdss_model_crit_values", Connection);
+                Command.CommandType = CommandType.StoredProcedure;
+                Command.Parameters.AddWithValue("ThisAlternativeId", int.Parse(_TB_ID.Text));
+                Connection.Open();
+                SqlDataReader reader = Command.ExecuteReader();
+                while (reader.Read())
+                {
+                    paramsList.Add(reader["value"].ToString());
+                }
+                reader.Close();
+
+                Command = new SqlCommand("dbo.issdss_model_crit_Read_Code_Params", Connection);
+                Command.CommandType = CommandType.StoredProcedure;
+                Command.Parameters.AddWithValue("ThisAlternativeId", int.Parse(_TB_ID.Text));
+                reader = Command.ExecuteReader();
+                while (reader.Read())
+                {
+                    codeList.Add(reader["code"].ToString());
+                }
+                reader.Close();
+
+                int i = 0;
+                foreach (var item in codeList)
+                {
+                    paramsTable.Add(item, double.Parse(paramsList[i]));
+                    i++;
+                }
+
+            }
+            modelsList modelID = modelsList.МоделиНЕТ;
+            object modelId = "";
+            using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
+            {
+                SqlCommand Command = new SqlCommand("dbo.issdss_model_read_id", Connection);
+                Command.CommandType = CommandType.StoredProcedure;
+                Command.Parameters.AddWithValue("ThisAlternativeId", int.Parse(_TB_ID.Text));
+                Connection.Open();
+                SqlDataReader reader = Command.ExecuteReader();
+                if (reader.Read())
+                {
+                    modelID = (modelsList)Enum.Parse(typeof(modelsList), reader["model_id"].ToString());
+                    runStart = true;
+                }
+                reader.Close();
+            }
+            Action<int> action;
+            switch (modelID)
+            {
+                case modelsList.ПростаяСМО:
+                    Modeling.TraceString = "";
+                    var smoModel = new PSS.Sample.SMOModel(null, "Модель СМО");
+                    action = smoModel.PERFORM;
+                    action.BeginInvoke(0, null, null);
+
+                    Response.Redirect("#");
+                    #region сохранение корм
+
+
+                    foreach (KeyValuePair<string, double> item in kormTable)
+                    {
+                        using (SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DSSConnectionString"].ConnectionString))
+                        {
+                            SqlCommand Command = new SqlCommand("dbo.issdss_crit_value_Insert_KORM", Connection);
+                            Command.CommandType = CommandType.StoredProcedure;
+                            Command.Parameters.AddWithValue("Value", item.Value);
+                            Command.Parameters.AddWithValue("Code", item.Key);
+                            Connection.Open();
+                            Command.ExecuteNonQuery();
+                        }
+                    }
+
+
+
+                    #endregion
+
+                    break;
+
+                case modelsList.ВычислительнаяСеть:
+                    Modeling.TraceString = "";
+                    var vs = new PSS.VS.VS(null, "Модель ВС");
+                    action = vs.PERFORM;
+                    action.BeginInvoke(0, null, null);
+                    Response.Redirect("#");
+                    break;
+
+                case modelsList.Лифт:
+                    Modeling.TraceString = "ДАННАЯ МОДЕЛЬ ЕЩЕ НЕ РЕАЛИЗОВАНА";
+                    Response.Redirect("#");
+                    break;
+
+                case modelsList.МоделиНЕТ:
+                    Modeling.TraceString = "ПРОИЗОШЛА ОШИБКА";
+                    Response.Redirect("#");
+                    break;
+            }
         }
     }
 }

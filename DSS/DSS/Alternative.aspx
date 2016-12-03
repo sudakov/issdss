@@ -99,6 +99,41 @@
                     <td colspan="3" class="itemSpacing"></td>
                 </tr>
                 </asp:Panel>
+
+
+                <tr>
+                    <td colspan="3" class="contentItemTitle30 contentItem" style="width:100%; text-align:center; padding:9px;">
+                        <table class="contentItems" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td style="width:20px;">
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="_LBL_Model" Text="Модели" Visible="false"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="itemSpacing">
+                    </td>
+                </tr>
+
+
+                <asp:Panel runat="server" ID="_PNL_Models" Visible="false">
+                <tr>
+                    <td colspan="3" class="controls" style="width:100%; text-align:center; padding:9px;">
+                        <asp:DropDownList runat="server" ID="_DDL_Models" Width="50%"/>
+                        <p onclick="return confirm('Произвести прогон модели? Процедура может занять некоторое время.');" style="width:1px; margin: auto 0px">
+                            <asp:ImageButton ID="_IMGBTN_RunModel" runat="server" ImageUrl="Images/play.png" AlternateText="Запустить прогон модели" Visible="false" ToolTip="Запустить прогон модели" OnClick="_IMGBTN_RunModel_Click"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="itemSpacing"></td>
+                </tr>
+                </asp:Panel>
+
                             
                 <asp:Panel runat="server" ID="_PNL_JobIsNotEmpty" Visible="false">
                 <tr>

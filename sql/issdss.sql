@@ -26,13 +26,15 @@ GO
 CREATE PROCEDURE issdss_alternative_Insert
     @TaskID int,
     @Name varchar(255),
-    @UserID int
+    @UserID int,
+	@ModelID int,
+    @ModelName varchar(255)
 AS
 BEGIN
     DECLARE @ID int
     SET @ID = isnull((select max(id) from alternative),0) + 1
-    INSERT INTO dbo.alternative(id, task_id, name)
-    VALUES (@ID, @TaskID, @Name)
+    INSERT INTO dbo.alternative(id, task_id, name, model_id, model_name)
+    VALUES (@ID, @TaskID, @Name, @ModelID, @ModelName)
     
     DECLARE @IDPA int
     SET @IDPA = isnull((select max(id) from person_alternative),0) + 1
@@ -82,12 +84,19 @@ DROP PROCEDURE issdss_alternative_Update
 GO
 CREATE PROCEDURE issdss_alternative_Update
     @AlternativeID int,
-    @Name varchar(255)
+    @Name varchar(255),
+	@ModelName varchar(255)
 AS
 BEGIN
     SET NOCOUNT ON;
     UPDATE dbo.alternative
         SET name = @Name
+			model_name = @ModelName,
+			model_id = (
+						 SELECT id 
+						 FROM dbo.model 
+						 WHERE model.name = @ModelName
+						)
     WHERE id = @AlternativeID
 END
 GO
